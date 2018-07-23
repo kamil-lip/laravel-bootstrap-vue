@@ -10,6 +10,9 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    {{-- output routes using ziggy package --}}
+    @routes
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
