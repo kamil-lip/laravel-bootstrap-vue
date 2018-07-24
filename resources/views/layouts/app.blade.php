@@ -43,16 +43,10 @@
                                 Dashboard <span class="sr-only">(current)</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-file"></i>
-                                Orders
-                            </a>
-                        </li>
                     </ul>
 
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Saved reports</span>
+                        <span>Resources</span>
                         <a class="d-flex align-items-center text-muted" href="#">
                             <i class="fas fa-plus-circle"></i>
                         </a>
@@ -60,9 +54,9 @@
 
                     <ul class="nav flex-column mb-2">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ url('/users') }}">
                                 <i class="fas fa-calendar"></i>
-                                Current month
+                                Users
                             </a>
                         </li>
                     </ul>
