@@ -18,7 +18,8 @@ const routes = [
     {
         path: '/users',
         component: ResourceList,
-        props: { resourceName: 'users' }
+        props: { resourceName: 'users' },
+        name: 'users'
     }
 ];
 

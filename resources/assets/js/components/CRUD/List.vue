@@ -1,5 +1,9 @@
 <template>
-    <b-table striped hover :items="records"></b-table>
+    <div>
+        <b-pagination-nav :use-router="true" :link-gen="linkGen" :number-of-pages="data.last_page"
+                          v-model="data.current_page" align="right"/>
+        <b-table striped hover :items="data.data"></b-table>
+    </div>
 </template>
 
 <script>
@@ -11,19 +15,32 @@
         },
         data() {
             return {
-                records: []
+                data: []
             };
         },
+        watch: {
+            $route() {
+                this.fetchPageData();
+            }
+        },
         methods: {
-            fetchAll() {
-                axios.get(route(this.resourceName + '.index'))
+            fetchPageData() {
+                axios.get('/api' + this.$route.fullPath)
                     .then((response) => {
-                        this.records = response.data
+                        this.data = response.data;
                     })
+            },
+            linkGen(pageNum) {
+                return {
+                    name: 'users',
+                    query: {
+                        page: pageNum
+                    }
+                }
             }
         },
         mounted() {
-            this.fetchAll();
+            this.fetchPageData();
         }
     }
 </script>

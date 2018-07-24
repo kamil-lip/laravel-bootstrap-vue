@@ -33735,7 +33735,8 @@ __webpack_require__(78);
 var routes = [{
     path: '/users',
     component: __WEBPACK_IMPORTED_MODULE_0__components_CRUD_List___default.a,
-    props: { resourceName: 'users' }
+    props: { resourceName: 'users' },
+    name: 'users'
 }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
@@ -67072,6 +67073,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -67081,21 +67086,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            records: []
+            data: []
         };
     },
 
+    watch: {
+        $route: function $route() {
+            this.fetchPageData();
+        }
+    },
     methods: {
-        fetchAll: function fetchAll() {
+        fetchPageData: function fetchPageData() {
             var _this = this;
 
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(route(this.resourceName + '.index')).then(function (response) {
-                _this.records = response.data;
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/api' + this.$route.fullPath).then(function (response) {
+                _this.data = response.data;
             });
+        },
+        linkGen: function linkGen(pageNum) {
+            return {
+                name: 'users',
+                query: {
+                    page: pageNum
+                }
+            };
         }
     },
     mounted: function mounted() {
-        this.fetchAll();
+        this.fetchPageData();
     }
 });
 
@@ -67107,9 +67125,29 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("b-table", {
-    attrs: { striped: "", hover: "", items: _vm.records }
-  })
+  return _c(
+    "div",
+    [
+      _c("b-pagination-nav", {
+        attrs: {
+          "use-router": true,
+          "link-gen": _vm.linkGen,
+          "number-of-pages": _vm.data.last_page,
+          align: "right"
+        },
+        model: {
+          value: _vm.data.current_page,
+          callback: function($$v) {
+            _vm.$set(_vm.data, "current_page", $$v)
+          },
+          expression: "data.current_page"
+        }
+      }),
+      _vm._v(" "),
+      _c("b-table", { attrs: { striped: "", hover: "", items: _vm.data.data } })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
