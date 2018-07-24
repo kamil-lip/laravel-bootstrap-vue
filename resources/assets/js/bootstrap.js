@@ -15,10 +15,12 @@ try {
 } catch (e) {}
 
 
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import BootstrapVue from 'bootstrap-vue';
 
-Vue.use(VueRouter)
+Vue.use(BootstrapVue);
+Vue.use(VueRouter);
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

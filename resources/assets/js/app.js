@@ -18,14 +18,14 @@ const routes = [
     {
         path: '/users',
         component: ResourceList,
-        props: { resource: 'users' }
+        props: { resourceName: 'users' }
     }
 ];
 
 const router = new VueRouter({
     mode: 'history',
     routes
-})
+});
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -33,7 +33,7 @@ const router = new VueRouter({
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
+new Vue({
     el: '#app',
     router
 });
