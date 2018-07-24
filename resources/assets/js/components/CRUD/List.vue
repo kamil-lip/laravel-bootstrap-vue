@@ -1,8 +1,12 @@
 <template>
     <div>
+        <h1>{{ resourceName.toUpperCase() }}</h1>
+        <hr/>
         <b-pagination-nav :use-router="true" :link-gen="linkGen" :number-of-pages="data.last_page"
                           v-model="data.current_page" align="right"/>
         <b-table striped hover :items="data.data"></b-table>
+        <b-pagination-nav :use-router="true" :link-gen="linkGen" :number-of-pages="data.last_page"
+                          v-model="data.current_page" align="right"/>
     </div>
 </template>
 

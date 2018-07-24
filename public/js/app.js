@@ -67077,6 +67077,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -67128,6 +67132,10 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("h1", [_vm._v(_vm._s(_vm.resourceName.toUpperCase()))]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
       _c("b-pagination-nav", {
         attrs: {
           "use-router": true,
@@ -67144,7 +67152,25 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("b-table", { attrs: { striped: "", hover: "", items: _vm.data.data } })
+      _c("b-table", {
+        attrs: { striped: "", hover: "", items: _vm.data.data }
+      }),
+      _vm._v(" "),
+      _c("b-pagination-nav", {
+        attrs: {
+          "use-router": true,
+          "link-gen": _vm.linkGen,
+          "number-of-pages": _vm.data.last_page,
+          align: "right"
+        },
+        model: {
+          value: _vm.data.current_page,
+          callback: function($$v) {
+            _vm.$set(_vm.data, "current_page", $$v)
+          },
+          expression: "data.current_page"
+        }
+      })
     ],
     1
   )
