@@ -67081,6 +67081,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -67090,7 +67096,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            data: []
+            data: [],
+            fields: ["id", "name", "email", "created_at", "updated_at", "actions"]
         };
     },
 
@@ -67107,13 +67114,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.data = response.data;
             });
         },
-        linkGen: function linkGen(pageNum) {
+        pagLinkGen: function pagLinkGen(pageNum) {
             return {
                 name: 'users',
                 query: {
                     page: pageNum
                 }
             };
+        },
+        deleteRecord: function deleteRecord(record) {
+            var _this2 = this;
+
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(route(this.resourceName + '.destroy', { id: record.id })).then(function (response) {
+                var records = _this2.data.data;
+                var recordIdx = records.findIndex(function (rec) {
+                    return rec.id === response.data.id;
+                });
+                records.splice(recordIdx, 1);
+            });
         }
     },
     mounted: function mounted() {
@@ -67139,7 +67157,7 @@ var render = function() {
       _c("b-pagination-nav", {
         attrs: {
           "use-router": true,
-          "link-gen": _vm.linkGen,
+          "link-gen": _vm.pagLinkGen,
           "number-of-pages": _vm.data.last_page,
           align: "right"
         },
@@ -67153,13 +67171,40 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("b-table", {
-        attrs: { striped: "", hover: "", items: _vm.data.data }
+        attrs: {
+          striped: "",
+          hover: "",
+          items: _vm.data.data,
+          fields: _vm.fields
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "actions",
+            fn: function(row) {
+              return [
+                _c(
+                  "b-button",
+                  {
+                    attrs: { size: "sm", variant: "danger" },
+                    on: {
+                      click: function($event) {
+                        $event.stopPropagation()
+                        _vm.deleteRecord(row.item)
+                      }
+                    }
+                  },
+                  [_vm._v("\n                Delete\n            ")]
+                )
+              ]
+            }
+          }
+        ])
       }),
       _vm._v(" "),
       _c("b-pagination-nav", {
         attrs: {
           "use-router": true,
-          "link-gen": _vm.linkGen,
+          "link-gen": _vm.pagLinkGen,
           "number-of-pages": _vm.data.last_page,
           align: "right"
         },

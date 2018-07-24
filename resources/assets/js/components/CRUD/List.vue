@@ -2,10 +2,16 @@
     <div>
         <h1>{{ resourceName.toUpperCase() }}</h1>
         <hr/>
-        <b-pagination-nav :use-router="true" :link-gen="linkGen" :number-of-pages="data.last_page"
+        <b-pagination-nav :use-router="true" :link-gen="pagLinkGen" :number-of-pages="data.last_page"
                           v-model="data.current_page" align="right"/>
-        <b-table striped hover :items="data.data"></b-table>
-        <b-pagination-nav :use-router="true" :link-gen="linkGen" :number-of-pages="data.last_page"
+        <b-table striped hover :items="data.data" :fields="fields">
+            <template slot="actions" slot-scope="row">
+                <b-button size="sm" @click.stop="deleteRecord(row.item)" variant="danger">
+                    Delete
+                </b-button>
+            </template>
+        </b-table>
+        <b-pagination-nav :use-router="true" :link-gen="pagLinkGen" :number-of-pages="data.last_page"
                           v-model="data.current_page" align="right"/>
     </div>
 </template>
@@ -19,7 +25,8 @@
         },
         data() {
             return {
-                data: []
+                data: [],
+                fields: ["id", "name", "email", "created_at", "updated_at", "actions"]
             };
         },
         watch: {
@@ -34,13 +41,23 @@
                         this.data = response.data;
                     })
             },
-            linkGen(pageNum) {
+            pagLinkGen(pageNum) {
                 return {
                     name: 'users',
                     query: {
                         page: pageNum
                     }
                 }
+            },
+            deleteRecord(record) {
+                axios.delete(route(this.resourceName + '.destroy', {id: record.id}))
+                    .then((response) => {
+                        let records = this.data.data;
+                        let recordIdx = records.findIndex((rec) => {
+                            return rec.id === response.data.id;
+                        });
+                        records.splice(recordIdx, 1);
+                    })
             }
         },
         mounted() {
