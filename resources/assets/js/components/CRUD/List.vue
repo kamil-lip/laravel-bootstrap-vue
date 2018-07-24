@@ -57,6 +57,7 @@
                             return rec.id === response.data.id;
                         });
                         records.splice(recordIdx, 1);
+                        this.fetchPageData();
                     })
             }
         },
