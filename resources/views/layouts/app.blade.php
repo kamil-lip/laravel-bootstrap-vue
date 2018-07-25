@@ -67,6 +67,7 @@
                 @yield('content')
             </main>
         </div>
+        <notifications group="app" position="top right"></notifications>
     </div>
 </div>
 </body>

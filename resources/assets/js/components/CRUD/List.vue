@@ -56,8 +56,17 @@
                         let recordIdx = records.findIndex((rec) => {
                             return rec.id === response.data.id;
                         });
-                        records.splice(recordIdx, 1);
-                        this.fetchPageData();
+                        if(recordIdx > -1) {
+                            records.splice(recordIdx, 1);
+                            this.fetchPageData();
+                            this.$notify({
+                                group: 'app',
+                                type: 'success',
+                                title: 'Success',
+                                text: 'Record has been deleted successfully'
+                            });
+                        }
+
                     })
             }
         },

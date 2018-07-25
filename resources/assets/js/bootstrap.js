@@ -18,9 +18,12 @@ try {
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import BootstrapVue from 'bootstrap-vue';
+import Notifications from 'vue-notification';
 
 Vue.use(BootstrapVue);
+Vue.use(Notifications);
 Vue.use(VueRouter);
+
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
