@@ -2,15 +2,16 @@
     <div>
         <h1>{{ resourceName.toUpperCase() }}</h1>
         <hr/>
-        <b-pagination-nav :use-router="true" :link-gen="pagLinkGen" :number-of-pages="data.last_page"
+        <b-pagination-nav class="float-right" :use-router="true" :link-gen="pagLinkGen" :number-of-pages="data.last_page"
                           v-model="data.current_page" align="right"/>
+        <b-button variant="primary" :to="{ name: 'users.create' }"><i class="fas fa-user-plus"></i> New user</b-button>
         <b-table striped hover :items="data.data" :fields="fields">
             <template slot="actions" slot-scope="row">
                 <b-button size="sm" variant="primary" :to="{ name: 'users.edit', params: { id: row.item.id }}">
-                    Edit
+                    <i class="fas fa-user-edit"></i> Edit
                 </b-button>
                 <b-button size="sm" @click.stop="handleDeleteRecordClick(row.item)" variant="danger">
-                    Delete
+                    <i class="fas fa-user-minus"></i> Delete
                 </b-button>
             </template>
         </b-table>
@@ -46,7 +47,7 @@
             },
             pagLinkGen(pageNum) {
                 return {
-                    name: 'users',
+                    name: 'users.index',
                     query: {
                         page: pageNum
                     }

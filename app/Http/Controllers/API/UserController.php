@@ -18,16 +18,20 @@ class UserController extends Controller
         return User::paginate(20);
     }
 
-//    /**
-//     * Store a newly created resource in storage.
-//     *
-//     * @param  \Illuminate\Http\Request  $request
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function store(Request $request)
-//    {
-//        //
-//    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $user = new User();
+        $data = $request->all();
+        $user->fill($data);
+        $user->save();
+        return $user;
+    }
 
     /**
      * Display the specified resource.

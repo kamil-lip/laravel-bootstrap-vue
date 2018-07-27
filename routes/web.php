@@ -30,5 +30,5 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 // CRUD
 Route::resource('users','UserController')->only([
-    'index', 'edit', 'show'
+    'index', 'edit', 'show', 'create'
 ]);;
