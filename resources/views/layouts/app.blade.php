@@ -68,6 +68,7 @@
             </main>
         </div>
         <notifications group="app" position="top right"></notifications>
+        <yes-no-dialog></yes-no-dialog>
     </div>
 </div>
 </body>

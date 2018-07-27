@@ -6,7 +6,7 @@
                           v-model="data.current_page" align="right"/>
         <b-table striped hover :items="data.data" :fields="fields">
             <template slot="actions" slot-scope="row">
-                <b-button size="sm" @click.stop="deleteRecord(row.item)" variant="danger">
+                <b-button size="sm" @click.stop="handleDeleteRecordClick(row.item)" variant="danger">
                     Delete
                 </b-button>
             </template>
@@ -56,7 +56,7 @@
                         let recordIdx = records.findIndex((rec) => {
                             return rec.id === response.data.id;
                         });
-                        if(recordIdx > -1) {
+                        if (recordIdx > -1) {
                             records.splice(recordIdx, 1);
                             this.fetchPageData();
                             this.$notify({
@@ -68,6 +68,14 @@
                         }
 
                     })
+            },
+            handleDeleteRecordClick(record) {
+                this.$confirm('Are you sure?').then((confirmed) => {
+                    if (confirmed) {
+                        this.deleteRecord(record);
+                    }
+                });
+
             }
         },
         mounted() {
