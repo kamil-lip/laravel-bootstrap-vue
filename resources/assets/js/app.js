@@ -6,22 +6,9 @@
 
 require('./bootstrap');
 
-import ResourceList from './components/CRUD/List';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-
-/**
- * route list
- * @type {*[]}
- */
-const routes = [
-    {
-        path: '/users',
-        component: ResourceList,
-        props: { resourceName: 'users' },
-        name: 'users'
-    }
-];
+import routes from './routes';
 
 const router = new VueRouter({
     mode: 'history',

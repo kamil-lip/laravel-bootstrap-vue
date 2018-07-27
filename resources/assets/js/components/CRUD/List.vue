@@ -6,6 +6,9 @@
                           v-model="data.current_page" align="right"/>
         <b-table striped hover :items="data.data" :fields="fields">
             <template slot="actions" slot-scope="row">
+                <b-button size="sm" variant="primary" :to="{ name: 'users.edit', params: { id: row.item.id }}">
+                    Edit
+                </b-button>
                 <b-button size="sm" @click.stop="handleDeleteRecordClick(row.item)" variant="danger">
                     Delete
                 </b-button>

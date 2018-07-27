@@ -29,4 +29,6 @@ $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 // CRUD
-Route::view('/users', 'common/crud');
+Route::resource('users','UserController')->only([
+    'index', 'edit', 'show'
+]);;
