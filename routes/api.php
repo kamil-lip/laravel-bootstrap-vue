@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('users','API\UserController')->only([
     'index', 'update', 'show', 'destroy', 'store'
 ]);;
+
+Route::get('/users/validation/rules', 'API\UserController@validationRules')->name('users.validation-rules');

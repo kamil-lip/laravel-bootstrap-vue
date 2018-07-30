@@ -2,12 +2,22 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Validation\Veevalidate\RulesTranslatorInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Validation\Veevalidate\SimpleRulesTranslator;
 
 class UserController extends Controller
 {
+    /**
+     * @var array validation rules
+     */
+    protected $rules = [
+        'name' => 'required',
+        'email' => 'required|email'
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -26,6 +36,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate($this->rules);
+
         $user = new User();
         $data = $request->all();
         $user->fill($data);
@@ -36,12 +48,18 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     * @param Request $request
+     * @return array
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        return User::findOrFail($id);
+        $user = User::findOrFail($id);
+        if($request->input('rules', false)) {
+            return ['data' => $user, 'rules' => $this->rules];
+        } else {
+            return $user;
+        }
     }
 
     /**
@@ -53,6 +71,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate($this->rules);
+
         $user = User::find($id);
         $user->update($request->all());
         return $user;
@@ -69,5 +89,19 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
         return $user;
+    }
+
+    /**
+     * Return rules needed for VeeValidate to display errors
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function validationRules(Request $request)
+    {
+        if($request->input('action', 'update') === 'store') {
+            return array_merge($this->rules, ['password' => 'required']);
+        }
+        return $this->rules;
     }
 }

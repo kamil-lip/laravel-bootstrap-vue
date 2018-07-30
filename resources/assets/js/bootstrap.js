@@ -20,11 +20,14 @@ import VueRouter from 'vue-router';
 import BootstrapVue from 'bootstrap-vue';
 import Notifications from 'vue-notification';
 import Dialog from './plugins/Dialog.js';
+import VeeValidate from 'vee-validate';
 
 Vue.use(BootstrapVue);
 Vue.use(Notifications);
 Vue.use(VueRouter);
 Vue.use(Dialog);
+
+Vue.use(VeeValidate);
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

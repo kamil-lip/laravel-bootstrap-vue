@@ -2,7 +2,7 @@
     <div>
         <h1>Edit user</h1>
         <hr/>
-        <resource-form :record="data" v-if="data !== null" @submit="submit">
+        <resource-form :rules="rules" :record="data" v-if="data !== null" :validated="validated" @submit="submit">
             <b-row class="my-2" slot="buttons">
                 <b-col md="8" class="text-right">
                     <b-button type="reset" variant="danger" @click="resetForm">Reset</b-button>
@@ -24,23 +24,50 @@
         },
         data() {
             return {
-                data: null
+                data: null,
+                validated: false,
+                rules: []
             }
         },
-        watch: {},
         methods: {
-            fetchRecord() {
+            fetchData() {
                 let path = '/api' + S(this.$route.fullPath).chompRight("/edit").s;
-                axios.get(path)
+                let config = {params: {rules: true}};
+                axios.get(path, config)
                     .then((response) => {
-                        this.data = response.data;
+                        this.data = response.data.data;
+                        this.rules = response.data.rules;
                     })
             },
             resetForm() {
-                this.fetchRecord();
+                this.fetchData();
             },
             submit() {
+                this.$validator.validateAll().then((result) => {
+                    this.validated = true;
+                    if (result) {
+                        this.updateData();
+                        return;
+                    }
+                    this.$notify({
+                        group: 'app',
+                        type: 'error',
+                        title: 'Error',
+                        text: 'The form contains errors. Please correct them.'
+                    });
+                });
                 // update record
+
+            },
+            displayErorrs(errors) {
+                for (let [fieldName, messages] of Object.entries(errors)) {
+                    this.errors.add({
+                        field: fieldName,
+                        msg: messages[0]
+                    })
+                }
+            },
+            updateData() {
                 let path = '/api' + S(this.$route.fullPath).chompRight("/edit").s;
                 axios.put(path, this.data)
                     .then((response) => {
@@ -52,18 +79,28 @@
                             text: 'Record has been updated successfully.'
                         });
                     })
-                    .catch(() => {
+                    .catch((error) => {
+                        let response = error.response;
+                        let message = 'An error occurred. Record has not been updated. Please try again.';
+
+                        // check if the response contains validation errors (we can't rely on client side validation only)
+                        if (response.status === 422 && response.data.errors !== undefined) {
+                            //display the errors
+                            this.displayErorrs(response.data.errors);
+                            message = 'The form contains errors. Please correct them.';
+                        }
+
                         this.$notify({
                             group: 'app',
                             type: 'error',
                             title: 'Error',
-                            text: 'An error occurred. Record has not been updated. Please try again.'
+                            text: message
                         });
                     })
             }
         },
         mounted() {
-            this.fetchRecord();
+            this.fetchData();
         }
     }
 </script>
