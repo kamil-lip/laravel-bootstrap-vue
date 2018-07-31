@@ -1,8 +1,10 @@
 <template>
     <div>
+        <b-breadcrumb :items="breadcrumbItems"/>
         <h1>New user</h1>
         <hr/>
-        <resource-form :password="true" :validated="validated" :rules="rules" :record="data" v-if="data !== null" @submit="submit">
+        <resource-form :password="true" :validated="validated" :rules="rules" :record="data" v-if="data !== null"
+                       @submit="submit">
             <b-row class="my-2" slot="buttons">
                 <b-col md="8" class="text-right">
                     <b-button type="submit" variant="primary">Submit</b-button>
@@ -27,8 +29,18 @@
                     name: '',
                     email: ''
                 },
-                rules: [],
+                rules: {},
                 validated: false,
+                breadcrumbItems: [{
+                    text: 'Home',
+                    href: '/'
+                }, {
+                    text: 'Users',
+                    to: {name: 'users.index'}
+                }, {
+                    text: 'Create',
+                    active: true
+                }]
             }
         },
         methods: {
@@ -71,8 +83,8 @@
             },
             fetchValidationRules() {
                 let path = '/api' + this.$route.fullPath.replace('/create', '/validation/rules');
-                let params = { action: 'store' };
-                axios.get(path, { params })
+                let params = {action: 'store'};
+                axios.get(path, {params})
                     .then((response) => {
                         this.rules = response.data;
                     })

@@ -1,11 +1,13 @@
 <template>
     <div>
+        <b-breadcrumb :items="breadcrumbItems"/>
         <h1>{{ resourceName.toUpperCase() }}</h1>
         <hr/>
-        <b-pagination-nav class="float-right" :use-router="true" :link-gen="pagLinkGen" :number-of-pages="data.last_page"
+        <b-pagination-nav class="float-right" :use-router="true" :link-gen="pagLinkGen"
+                          :number-of-pages="data.last_page"
                           v-model="data.current_page" align="right"/>
         <b-button variant="primary" :to="{ name: 'users.create' }"><i class="fas fa-user-plus"></i> New user</b-button>
-        <b-table striped hover :items="data.data" :fields="fields">
+        <b-table striped hover :items="data.data" :fields="tableFields">
             <template slot="actions" slot-scope="row">
                 <b-button size="sm" variant="primary" :to="{ name: 'users.edit', params: { id: row.item.id }}">
                     <i class="fas fa-user-edit"></i> Edit
@@ -30,7 +32,14 @@
         data() {
             return {
                 data: [],
-                fields: ["id", "name", "email", "created_at", "updated_at", "actions"]
+                tableFields: ["id", "name", "email", "created_at", "updated_at", "actions"],
+                breadcrumbItems: [{
+                    text: 'Home',
+                    href: '/'
+                }, {
+                    text: 'Users',
+                    to: {name: 'users.index'}
+                }]
             };
         },
         watch: {
@@ -44,7 +53,8 @@
                     .then((response) => {
                         this.data = response.data;
                     })
-            },
+            }
+            ,
             pagLinkGen(pageNum) {
                 return {
                     name: 'users.index',
@@ -52,7 +62,8 @@
                         page: pageNum
                     }
                 }
-            },
+            }
+            ,
             deleteRecord(record) {
                 axios.delete(route(this.resourceName + '.destroy', {id: record.id}))
                     .then((response) => {
@@ -72,7 +83,8 @@
                         }
 
                     })
-            },
+            }
+            ,
             handleDeleteRecordClick(record) {
                 this.$confirm('Are you sure?').then((confirmed) => {
                     if (confirmed) {
@@ -81,7 +93,8 @@
                 });
 
             }
-        },
+        }
+        ,
         mounted() {
             this.fetchPageData();
         }

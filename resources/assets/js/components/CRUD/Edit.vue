@@ -1,5 +1,6 @@
 <template>
     <div>
+        <b-breadcrumb :items="breadcrumbItems"/>
         <h1>Edit user</h1>
         <hr/>
         <resource-form :rules="rules" :record="data" v-if="data !== null" :validated="validated" @submit="submit">
@@ -27,6 +28,20 @@
                 data: null,
                 validated: false,
                 rules: []
+            }
+        },
+        computed: {
+            breadcrumbItems() {
+                return this.data ? [{
+                    text: 'Home',
+                    href: '/'
+                }, {
+                    text: 'Users',
+                    to: {name: 'users.index'}
+                }, {
+                    text: this.data.name,
+                    active: true
+                }] : [];
             }
         },
         methods: {

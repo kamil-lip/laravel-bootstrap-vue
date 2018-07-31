@@ -27,7 +27,9 @@ Vue.use(Notifications);
 Vue.use(VueRouter);
 Vue.use(Dialog);
 
-Vue.use(VeeValidate);
+Vue.use(VeeValidate, {
+    fieldsBagName: 'veeFields'
+});
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
