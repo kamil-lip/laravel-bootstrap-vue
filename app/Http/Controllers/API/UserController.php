@@ -60,6 +60,7 @@ class UserController extends Controller
      *
      * @param  int $id
      * @param Request $request
+     * @param SimpleRulesTranslator $rulesTranslator
      * @return array
      */
     public function show($id, Request $request, SimpleRulesTranslator $rulesTranslator)
@@ -106,8 +107,8 @@ class UserController extends Controller
      * Return rules needed for VeeValidate to display errors
      *
      * @param Request $request
-     * @param RulesTranslatorInterface $rulesTranslator
-     * @return array
+     * @param SimpleRulesTranslator $rulesTranslator
+     * @return \App\Validation\Veevalidate\Array
      */
     public function validationRules(Request $request, SimpleRulesTranslator $rulesTranslator)
     {
