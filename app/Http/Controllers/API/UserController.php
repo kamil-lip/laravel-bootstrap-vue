@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     protected $rules = [
         'name' => 'required|min:5',
-        'email' => 'required|email'
+        'email' => 'required|email|unique:users,email'
     ];
 
     /**
@@ -43,8 +43,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->rules['email'] .= '|unique:users';
-
         $request->validate(array_merge($this->rules, $this->createRules));
 
         $user = new User();
@@ -83,6 +81,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->rules['email'] .= ",$id";
+
         $request->validate($this->rules);
 
         $user = User::find($id);
