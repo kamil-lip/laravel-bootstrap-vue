@@ -35,7 +35,7 @@
                 tableFields: ["id", "name", "email", "created_at", "updated_at", "actions"],
                 breadcrumbItems: [{
                     text: 'Home',
-                    href: '/'
+                    to: {name: 'home'}
                 }, {
                     text: 'Users',
                     to: {name: 'users.index'}

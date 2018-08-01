@@ -3,11 +3,11 @@
         <b-breadcrumb :items="breadcrumbItems"/>
         <h1>Edit user</h1>
         <hr/>
-        <resource-form :rules="rules" :record="data" v-if="data !== null" :validated="validated" @submit="submit">
+        <resource-form :rules="rules" :record="data" v-if="data !== null && rules !== null" :validated="validated" @submit="submit">
             <b-row class="my-2" slot="buttons">
                 <b-col md="8" class="text-right">
                     <b-button type="reset" variant="danger" @click="resetForm">Reset</b-button>
-                    <b-button type="submit" variant="primary">Submit</b-button>
+                    <b-button type="submit" variant="primary">Update</b-button>
                 </b-col>
             </b-row>
         </resource-form>
@@ -27,14 +27,14 @@
             return {
                 data: null,
                 validated: false,
-                rules: []
+                rules: null
             }
         },
         computed: {
             breadcrumbItems() {
                 return this.data ? [{
                     text: 'Home',
-                    href: '/'
+                    to: {name: 'home'}
                 }, {
                     text: 'Users',
                     to: {name: 'users.index'}
@@ -58,7 +58,7 @@
                 this.fetchData();
             },
             submit() {
-                this.$validator.validateAll().then((result) => {
+                this.$validator.validate().then((result) => {
                     this.validated = true;
                     if (result) {
                         this.updateData();

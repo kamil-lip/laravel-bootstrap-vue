@@ -8,6 +8,9 @@
 
 <script>
     export default {
+        inject: {
+            $validator: '$validator'
+        },
         props: {
             type: {
                 type: String,

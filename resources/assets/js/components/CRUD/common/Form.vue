@@ -1,8 +1,8 @@
 <template>
-    <b-form :validated="validated" @submit.prevent="$emit('submit')" novalidate>
+    <b-form :validated="validated" @submit.prevent.stop="$emit('submit')" novalidate>
         <form-row>
             <label slot="label" :for="record.name">Name:</label>
-            <form-input slot="component" name="name" :validationRules="this.rules.name" v-model="record.name"></form-input>
+            <form-input autocomplete="name" slot="component" name="name" :validationRules="this.rules.name" v-model="record.name"></form-input>
         </form-row>
         <form-row>
             <label slot="label" :for="record.email">E-mail:</label>
@@ -28,7 +28,9 @@
     import FormInput from '../../common/form/Input';
 
     export default {
-        inject: ['$validator'],
+        inject: {
+            $validator: '$validator'
+        },
         props: {
             record: Object,
             validated: {

@@ -2,20 +2,27 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Validation\Veevalidate\RulesTranslatorInterface;
+use App\Validation\Veevalidate\SimpleRulesTranslator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
-use App\Validation\Veevalidate\SimpleRulesTranslator;
+use App\Validation\Veevalidate\RulesTranslatorInterface;
 
 class UserController extends Controller
 {
     /**
-     * @var array validation rules
+     * @var array validation rules which applies to both: create and update
      */
     protected $rules = [
-        'name' => 'required',
+        'name' => 'required|min:5',
         'email' => 'required|email'
+    ];
+
+    /**
+     * @var array rules which only applies to new records.
+     */
+    protected $createRules = [
+        'password' => 'required|min:8'
     ];
 
     /**
@@ -31,12 +38,14 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $request->validate($this->rules);
+        $this->rules['email'] .= '|unique:users';
+
+        $request->validate(array_merge($this->rules, $this->createRules));
 
         $user = new User();
         $data = $request->all();
@@ -52,11 +61,12 @@ class UserController extends Controller
      * @param Request $request
      * @return array
      */
-    public function show($id, Request $request)
+    public function show($id, Request $request, SimpleRulesTranslator $rulesTranslator)
     {
         $user = User::findOrFail($id);
-        if($request->input('rules', false)) {
-            return ['data' => $user, 'rules' => $this->rules];
+        if ($request->input('rules', false)) {
+            $rules = $rulesTranslator->translate($this->rules);
+            return ['data' => $user, 'rules' => $rules];
         } else {
             return $user;
         }
@@ -65,8 +75,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -81,7 +91,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -95,13 +105,16 @@ class UserController extends Controller
      * Return rules needed for VeeValidate to display errors
      *
      * @param Request $request
+     * @param RulesTranslatorInterface $rulesTranslator
      * @return array
      */
-    public function validationRules(Request $request)
+    public function validationRules(Request $request, SimpleRulesTranslator $rulesTranslator)
     {
-        if($request->input('action', 'update') === 'store') {
-            return array_merge($this->rules, ['password' => 'required']);
+        if ($request->input('action', 'update') === 'create') {
+            $rules = array_merge($this->rules, $this->createRules);
+        } else {
+            $rules = $this->rules;
         }
-        return $this->rules;
+        return $rulesTranslator->translate($rules);
     }
 }

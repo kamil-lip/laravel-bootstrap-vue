@@ -11,6 +11,9 @@
 
 <script>
     export default {
+        inject: {
+            $validator: '$validator'
+        },
         props: {
             for: {
                 type: String,
