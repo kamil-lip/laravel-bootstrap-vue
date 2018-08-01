@@ -49,6 +49,7 @@ class UserController extends Controller
 
         $user = new User();
         $data = $request->all();
+        $data['password'] = bcrypt($data['password']);
         $user->fill($data);
         $user->save();
         return $user;
