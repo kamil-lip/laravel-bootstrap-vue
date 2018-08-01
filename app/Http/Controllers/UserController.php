@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('common/crud');
+        return view('common/vue');
     }
 
     /**
@@ -23,7 +23,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('common/crud');
+        return view('common/vue');
     }
 
 
@@ -34,7 +34,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show()
-    {return view('common/crud');//
+    {return view('common/vue');//
     }
 
     /**
@@ -45,6 +45,6 @@ class UserController extends Controller
      */
     public function edit()
     {
-        return view('common/crud');
+        return view('common/vue');
     }
 }

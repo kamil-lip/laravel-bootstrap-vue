@@ -1,11 +1,18 @@
 import ResourceList from './components/CRUD/List';
 import EditResource from './components/CRUD/Edit';
 import ResourceCreate from './components/CRUD/Create';
+import Dashboard from './components/pages/Dashboard';
 /**
  * route list
  * @type {*[]}
  */
 export default [
+    {
+        path: '/',
+        component: Dashboard,
+        props: { resourceName: 'home' },
+        name: 'home'
+    },
     {
         path: '/users',
         component: ResourceList,
