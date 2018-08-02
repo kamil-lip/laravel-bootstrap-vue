@@ -60,7 +60,6 @@
             $route(route) {
                 // don't fetch data if we are leaving index page
                 if(route.name === 'users.index') {
-                    console.log('e')
                     this.fetchPageData();
                 }
             }
