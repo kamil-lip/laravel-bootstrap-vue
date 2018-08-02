@@ -28,10 +28,16 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->has('filter')) {
+            $filter = $request->input('filter');
+            // TODO: replace it with scout compatible solution
+            return User::where('name', 'LIKE', "%$filter%")->orWhere('email', 'LIKE', "%$filter%")->paginate(20);
+        }
         return User::paginate(20);
     }
 

@@ -4,11 +4,18 @@
             <b-breadcrumb :items="breadcrumbItems"/>
             <h1>{{ resourceName.toUpperCase() }}</h1>
             <hr/>
-            <b-pagination-nav class="float-right" :use-router="true" :link-gen="pagLinkGen"
-                              :number-of-pages="data.last_page"
-                              v-model="data.current_page" align="right"/>
             <b-button variant="primary" :to="{ name: 'users.create' }"><i class="fas fa-user-plus"></i> New user
             </b-button>
+            <div class="my-4">
+                <b-pagination-nav class="float-right" :use-router="true" :link-gen="pagLinkGen"
+                                  :number-of-pages="data.last_page"
+                                  v-model="data.current_page" align="right"/>
+                <b-form inline class="float-left">
+                    <label class="mr-sm-2">Filter</label>
+                    <input class="form-control" placeholder="Type to search" v-model.lazy="filter"
+                           v-debounce="filterDelay"/>
+                </b-form>
+            </div>
             <transition name="fade">
                 <div v-if="!loading">
                     <b-table striped hover :items="data.data" :fields="tableFields">
@@ -34,10 +41,14 @@
 <script>
     import axios from 'axios';
     import BlockLoader from '../common/BlockLoader';
+    import debounce from 'v-debounce';
 
     export default {
         components: {
             BlockLoader
+        },
+        directives: {
+            debounce
         },
         props: {
             resourceName: String
@@ -53,29 +64,39 @@
                     text: 'Users',
                     to: {name: 'users.index'}
                 }],
+                filter: '',
+                filterDelay: 400,
                 loading: false
             };
         },
         watch: {
             $route(route) {
                 // don't fetch data if we are leaving index page
-                if(route.name === 'users.index') {
+                if (route.name === 'users.index') {
                     this.fetchPageData();
                 }
+            },
+            filter() {
+                // after filtering than can be less pages so lets navigate to the first page
+                this.$router.replace({name: 'users.index'});
+                this.fetchPageData();
             }
         },
         methods: {
             fetchPageData() {
                 this.loading = true;
-                axios.get('/api' + this.$route.fullPath)
+                let params = {};
+                if (this.filter.length > 0) {
+                    params['filter'] = this.filter;
+                }
+                axios.get('/api' + this.$route.fullPath, {params})
                     .then((response) => {
                         this.data = response.data;
                     }).then(() => {
                     // always executed
                     this.loading = false
                 });
-            }
-            ,
+            },
             pagLinkGen(pageNum) {
                 return {
                     name: 'users.index',
@@ -123,7 +144,14 @@
 </script>
 
 <style>
+    .resource-list {
+        position: relative;
+    }
+
     .resource-list .block-loader {
-        height: 500px;
+        position: absolute;
+        left: 50%;
+        top: 300px;
+        margin-left: -100px;
     }
 </style>
