@@ -1,17 +1,20 @@
 <template>
-    <div>
-        <b-breadcrumb :items="breadcrumbItems"/>
-        <h1>Edit user</h1>
-        <hr/>
-        <resource-form :rules="rules" :record="data" v-if="data !== null && rules !== null" :validated="validated" @submit="submit">
-            <b-row class="my-2" slot="buttons">
-                <b-col md="8" class="text-right">
-                    <b-button type="reset" variant="danger" @click="resetForm">Reset</b-button>
-                    <b-button type="submit" variant="primary">Update</b-button>
-                </b-col>
-            </b-row>
-        </resource-form>
-    </div>
+    <transition name="fade">
+        <div v-if="data !== null && rules !== null">
+            <b-breadcrumb :items="breadcrumbItems"/>
+            <h1>Edit user</h1>
+            <hr/>
+            <resource-form :rules="rules" :record="data" :validated="validated"
+                           @submit="submit">
+                <b-row class="my-2" slot="buttons">
+                    <b-col md="8" class="text-right">
+                        <b-button type="reset" variant="danger" @click="resetForm">Reset</b-button>
+                        <b-button type="submit" variant="primary">Update</b-button>
+                    </b-col>
+                </b-row>
+            </resource-form>
+        </div>
+    </transition>
 </template>
 
 <script>

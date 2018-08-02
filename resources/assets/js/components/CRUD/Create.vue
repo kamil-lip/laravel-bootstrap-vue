@@ -1,9 +1,10 @@
 <template>
-    <div>
+    <transition name="fade">
+    <div v-if="rules !== null">
         <b-breadcrumb :items="breadcrumbItems"/>
         <h1>New user</h1>
         <hr/>
-        <resource-form :rules="rules" :password="true" :validated="validated" :record="data" v-if="data !== null && rules !== null"
+        <resource-form :rules="rules" :password="true" :validated="validated" :record="data"
                        @submit="submit">
             <b-row class="my-2" slot="buttons">
                 <b-col md="8" class="text-right">
@@ -12,6 +13,7 @@
             </b-row>
         </resource-form>
     </div>
+    </transition>
 </template>
 
 <script>
