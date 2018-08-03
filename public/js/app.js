@@ -78140,7 +78140,14 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "b-form",
-                  { staticClass: "float-left", attrs: { inline: "" } },
+                  {
+                    staticClass: "form-inline float-left",
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                      }
+                    }
+                  },
                   [
                     _c("label", { staticClass: "mr-sm-2" }, [_vm._v("Filter")]),
                     _vm._v(" "),
@@ -78160,7 +78167,7 @@ var render = function() {
                           expression: "filterDelay"
                         }
                       ],
-                      staticClass: "form-control",
+                      staticClass: "form-control filter",
                       attrs: { placeholder: "Type to search" },
                       domProps: { value: _vm.filter },
                       on: {
@@ -78181,6 +78188,7 @@ var render = function() {
                     "div",
                     [
                       _c("b-table", {
+                        staticClass: "user-list-table",
                         attrs: {
                           striped: "",
                           hover: "",
@@ -79616,12 +79624,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -79629,12 +79631,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             menuItems: [{
                 iconClass: 'fas fa-users',
                 to: { name: 'users.index' },
-                label: 'Users',
-                children: [{
-                    iconClass: 'fas fa-user-plus',
-                    to: { name: 'users.create' },
-                    label: 'New'
-                }]
+                label: 'Users'
             }]
         };
     }
@@ -79675,23 +79672,8 @@ var render = function() {
             { key: item.label, attrs: { to: item.to, exact: "" } },
             [
               _c("i", { class: item.iconClass }),
-              _vm._v("\n            " + _vm._s(item.label) + "\n            "),
-              _c(
-                "b-nav",
-                { attrs: { vertical: "" } },
-                _vm._l(item.children, function(item) {
-                  return _c(
-                    "b-nav-item",
-                    { key: item.label, attrs: { to: item.to, exact: "" } },
-                    [
-                      _c("i", { class: item.iconClass }),
-                      _vm._v(" " + _vm._s(item.label) + "\n                ")
-                    ]
-                  )
-                })
-              )
-            ],
-            1
+              _vm._v("\n            " + _vm._s(item.label) + "\n        ")
+            ]
           )
         })
       )

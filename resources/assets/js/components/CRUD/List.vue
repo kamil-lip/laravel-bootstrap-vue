@@ -10,15 +10,15 @@
                 <b-pagination-nav class="float-right" :use-router="true" :link-gen="pagLinkGen"
                                   :number-of-pages="data.last_page"
                                   v-model="data.current_page" align="right"/>
-                <b-form inline class="float-left">
+                <b-form @submit.prevent class="form-inline float-left">
                     <label class="mr-sm-2">Filter</label>
-                    <input class="form-control" placeholder="Type to search" v-model.lazy="filter"
+                    <input class="form-control filter" placeholder="Type to search" v-model.lazy="filter"
                            v-debounce="filterDelay"/>
                 </b-form>
             </div>
             <transition name="fade">
                 <div v-if="!loading">
-                    <b-table striped hover :items="data.data" :fields="tableFields">
+                    <b-table class="user-list-table" striped hover :items="data.data" :fields="tableFields">
                         <template slot="actions" slot-scope="row">
                             <b-button size="sm" variant="primary"
                                       :to="{ name: 'users.edit', params: { id: row.item.id }}">

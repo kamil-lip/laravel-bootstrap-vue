@@ -12,12 +12,6 @@
         <b-nav vertical>
             <b-nav-item :to="item.to" v-for="item in menuItems" :key="item.label" exact><i :class="item.iconClass"></i>
                 {{ item.label }}
-                <b-nav vertical>
-                    <b-nav-item :to="item.to" v-for="item in item.children" :key="item.label" exact><i
-                            :class="item.iconClass"></i> {{ item.label }}
-                    </b-nav-item>
-                </b-nav>
-
             </b-nav-item>
         </b-nav>
 
@@ -34,13 +28,6 @@
                         iconClass: 'fas fa-users',
                         to: { name: 'users.index'},
                         label: 'Users',
-                        children: [
-                            {
-                                iconClass: 'fas fa-user-plus',
-                                to: { name: 'users.create'},
-                                label: 'New'
-                            }
-                        ]
                     }
                 ]
             }
