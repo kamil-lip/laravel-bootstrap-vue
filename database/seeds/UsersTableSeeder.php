@@ -14,8 +14,9 @@ class UsersTableSeeder extends Seeder
     {
         User::firstOrCreate([
             'name' => 'superadmin',
-            'email' => 'somename@thisemaildoesnotexists.com',
+            'email' => 'somename@nonexistingdomain.com',
             'password' => bcrypt('dsfjks12D'),
         ]);
+        factory(App\User::class, 50)->create();
     }
 }

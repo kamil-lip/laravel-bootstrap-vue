@@ -6,6 +6,7 @@
 /.idea
 /.vscode
 /.vagrant
+/laradock
 Homestead.json
 Homestead.yaml
 npm-debug.log
@@ -14,4 +15,7 @@ yarn-error.log
 *.sublime-project
 *.sublime-workspace
 /public/phpinfo.php
-/laradock
+_ide_helper.php
+.phpstorm.meta.php
+/deploy.sh
+/laradock-*
