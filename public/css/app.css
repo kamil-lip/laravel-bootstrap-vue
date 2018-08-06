@@ -10821,6 +10821,10 @@ a.text-dark:focus {
   opacity: 0;
 }
 
+nav > ul.pagination {
+  margin-bottom: 0;
+}
+
 .navbar-laravel {
   background-color: #fff;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);

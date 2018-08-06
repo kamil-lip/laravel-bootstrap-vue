@@ -6,18 +6,18 @@
             <hr/>
             <b-button variant="primary" :to="{ name: 'users.create' }"><i class="fas fa-user-plus"></i> New user
             </b-button>
-            <div class="my-4">
+            <div class="my-3 clearfix">
                 <b-pagination-nav class="float-right" :use-router="true" :link-gen="pagLinkGen"
                                   :number-of-pages="data.last_page"
-                                  v-model="data.current_page" align="right"/>
-                <b-form @submit.prevent class="form-inline float-left">
+                                  v-model="data.current_page" align="right" v-if="!loading && data.total > 0" />
+                <b-form @submit.prevent class="form-inline float-left" v-if="!loading && data.total > 0 || filter.length > 0">
                     <label class="mr-sm-2">Filter</label>
                     <input class="form-control filter" placeholder="Type to search" v-model.lazy="filter"
-                           v-debounce="filterDelay"/>
+                           v-debounce="filterDelay" />
                 </b-form>
             </div>
             <transition name="fade">
-                <div v-if="!loading">
+                <div v-if="!loading && data.total > 0">
                     <b-table class="user-list-table" striped hover :items="data.data" :fields="tableFields">
                         <template slot="actions" slot-scope="row">
                             <b-button size="sm" variant="primary"
@@ -29,9 +29,11 @@
                             </b-button>
                         </template>
                     </b-table>
-                    <b-pagination-nav :use-router="true" :link-gen="pagLinkGen" :number-of-pages="data.last_page"
-                                      v-model="data.current_page" align="right"/>
+                    <b-pagination-nav class="mb-3" :use-router="true" :link-gen="pagLinkGen" :number-of-pages="data.last_page"
+                                      v-model="data.current_page" align="right" />
                 </div>
+                <b-alert show v-if="!loading && data.total === 0">No results matching your search criteria found.
+                </b-alert>
             </transition>
             <block-loader class="block-loader" v-if="loading"></block-loader>
         </div>
