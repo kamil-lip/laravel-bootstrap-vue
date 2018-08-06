@@ -56,6 +56,23 @@
                         this.data = response.data.data;
                         this.rules = response.data.rules;
                     })
+                    .catch((error) => {
+                        let response = error.response;
+                        let message = 'An error occurred. Please refresh.';
+
+                        if (response.status === 404) {
+                            message = 'User does not exist.';
+                            this.$router.replace({name: 'users.index'});
+                        }
+
+                        this.$notify({
+                            group: 'app',
+                            type: 'error',
+                            title: 'Error',
+                            text: message
+                        });
+
+                    })
             },
             resetForm() {
                 this.fetchData();
