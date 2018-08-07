@@ -1,6 +1,6 @@
 <template>
     <vue-page id="resource-list-page">
-        <div>
+        <div v-if="data !== null">
             <b-breadcrumb :items="breadcrumbItems"/>
             <h1>{{ resourceName.toUpperCase() }}</h1>
             <hr/>
