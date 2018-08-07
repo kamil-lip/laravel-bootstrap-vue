@@ -77619,7 +77619,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -77779,9 +77778,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "vue-page",
-    { attrs: { id: "resource-list-page", loading: _vm.loading } },
+    { attrs: { id: "resource-list-page", loading: false } },
     [
-      _vm.data !== null && !_vm.loading
+      _vm.data !== null
         ? _c(
             "div",
             [
@@ -77823,50 +77822,48 @@ var render = function() {
                       })
                     : _vm._e(),
                   _vm._v(" "),
-                  (!_vm.loading && _vm.data.total > 0) || _vm.filter.length > 0
-                    ? _c(
-                        "b-form",
-                        {
-                          staticClass: "form-inline float-left",
-                          on: {
-                            submit: function($event) {
-                              $event.preventDefault()
-                            }
+                  _c(
+                    "b-form",
+                    {
+                      staticClass: "form-inline float-left",
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                        }
+                      }
+                    },
+                    [
+                      _c("label", { staticClass: "mr-sm-2" }, [
+                        _vm._v("Filter")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.lazy",
+                            value: _vm.filter,
+                            expression: "filter",
+                            modifiers: { lazy: true }
+                          },
+                          {
+                            name: "debounce",
+                            rawName: "v-debounce",
+                            value: _vm.filterDelay,
+                            expression: "filterDelay"
                           }
-                        },
-                        [
-                          _c("label", { staticClass: "mr-sm-2" }, [
-                            _vm._v("Filter")
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model.lazy",
-                                value: _vm.filter,
-                                expression: "filter",
-                                modifiers: { lazy: true }
-                              },
-                              {
-                                name: "debounce",
-                                rawName: "v-debounce",
-                                value: _vm.filterDelay,
-                                expression: "filterDelay"
-                              }
-                            ],
-                            staticClass: "form-control filter",
-                            attrs: { placeholder: "Type to search" },
-                            domProps: { value: _vm.filter },
-                            on: {
-                              change: function($event) {
-                                _vm.filter = $event.target.value
-                              }
-                            }
-                          })
-                        ]
-                      )
-                    : _vm._e()
+                        ],
+                        staticClass: "form-control filter",
+                        attrs: { placeholder: "Type to search" },
+                        domProps: { value: _vm.filter },
+                        on: {
+                          change: function($event) {
+                            _vm.filter = $event.target.value
+                          }
+                        }
+                      })
+                    ]
+                  )
                 ],
                 1
               ),

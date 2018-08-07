@@ -1,6 +1,6 @@
 <template>
-    <vue-page id="resource-list-page" :loading="loading">
-        <div v-if="data !== null && !loading">
+    <vue-page id="resource-list-page" :loading="false">
+        <div v-if="data !== null">
             <b-breadcrumb :items="breadcrumbItems"/>
             <h1>{{ resourceName.toUpperCase() }}</h1>
             <hr/>
@@ -10,8 +10,7 @@
                 <b-pagination-nav class="float-right" :use-router="true" :link-gen="pagLinkGen"
                                   :number-of-pages="data.last_page"
                                   v-model="data.current_page" align="right" v-if="!loading && data.total > 0"/>
-                <b-form @submit.prevent class="form-inline float-left"
-                        v-if="!loading && data.total > 0 || filter.length > 0">
+                <b-form @submit.prevent class="form-inline float-left">
                     <label class="mr-sm-2">Filter</label>
                     <input class="form-control filter" placeholder="Type to search" v-model.lazy="filter"
                            v-debounce="filterDelay"/>
