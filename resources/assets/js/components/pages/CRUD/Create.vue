@@ -1,19 +1,19 @@
 <template>
-    <transition name="fade">
-    <div v-if="rules !== null">
-        <b-breadcrumb :items="breadcrumbItems"/>
-        <h1>New user</h1>
-        <hr/>
-        <resource-form :rules="rules" :password="true" :validated="validated" :record="data"
-                       @submit="submit">
-            <b-row class="my-2" slot="buttons">
-                <b-col md="8" class="text-right">
-                    <b-button type="submit" variant="primary" :disabled="errors.any()">Submit</b-button>
-                </b-col>
-            </b-row>
-        </resource-form>
-    </div>
-    </transition>
+    <vue-page id="resource-create-page" :loading="loading">
+        <div v-if="rules !== null">
+            <b-breadcrumb :items="breadcrumbItems"/>
+            <h1>New user</h1>
+            <hr/>
+            <resource-form :rules="rules" :password="true" :validated="validated" :record="data"
+                           @submit="submit">
+                <b-row class="my-2" slot="buttons">
+                    <b-col md="8" class="text-right">
+                        <b-button type="submit" variant="primary" :disabled="errors.any()">Submit</b-button>
+                    </b-col>
+                </b-row>
+            </resource-form>
+        </div>
+    </vue-page>
 </template>
 
 <script>
@@ -34,6 +34,7 @@
                 },
                 rules: null,
                 validated: false,
+                loading: false,
                 breadcrumbItems: [{
                     text: 'Home',
                     to: {name: 'home'}
@@ -48,6 +49,7 @@
         },
         methods: {
             displayErorrs(errors) {
+                this.errors.clear();
                 for (let [fieldName, messages] of Object.entries(errors)) {
                     this.errors.add({
                         field: fieldName,
@@ -105,10 +107,13 @@
             fetchValidationRules() {
                 let path = '/api' + this.$route.fullPath.replace('/create', '/validation/rules');
                 let params = {action: 'create'};
+                this.loading = true;
                 axios.get(path, {params})
                     .then((response) => {
                         this.rules = response.data;
-                    })
+                    }).then(() => {
+                    this.loading = false;
+                })
             },
         },
         mounted() {

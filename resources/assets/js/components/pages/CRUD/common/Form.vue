@@ -25,7 +25,7 @@
 
 <script>
     import FormRow from './FormRow';
-    import FormInput from '../../common/form/Input';
+    import FormInput from '../../../common/form/Input';
 
     export default {
         inject: {

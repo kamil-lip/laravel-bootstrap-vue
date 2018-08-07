@@ -1,6 +1,6 @@
-import ResourceList from './components/CRUD/List';
-import EditResource from './components/CRUD/Edit';
-import ResourceCreate from './components/CRUD/Create';
+import ResourceList from './components/pages/CRUD/List';
+import EditResource from './components/pages/CRUD/Edit';
+import ResourceCreate from './components/pages/CRUD/Create';
 import Dashboard from './components/pages/Dashboard';
 import PageNotFound from './components/common/PageNotFound';
 /**

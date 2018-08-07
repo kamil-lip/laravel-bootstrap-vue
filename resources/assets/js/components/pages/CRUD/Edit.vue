@@ -1,5 +1,5 @@
 <template>
-    <transition name="fade">
+    <vue-page id="resource-edit-page" :loading="loading">
         <div v-if="data !== null && rules !== null">
             <b-breadcrumb :items="breadcrumbItems"/>
             <h1>Edit user</h1>
@@ -14,7 +14,7 @@
                 </b-row>
             </resource-form>
         </div>
-    </transition>
+    </vue-page>
 </template>
 
 <script>
@@ -30,7 +30,8 @@
             return {
                 data: null,
                 validated: false,
-                rules: null
+                rules: null,
+                loading: false
             }
         },
         computed: {
@@ -51,6 +52,7 @@
             fetchData() {
                 let path = '/api' + S(this.$route.fullPath).chompRight("/edit").s;
                 let config = {params: {rules: true}};
+                this.loading = true;
                 axios.get(path, config)
                     .then((response) => {
                         this.data = response.data.data;
@@ -72,7 +74,9 @@
                             text: message
                         });
 
-                    })
+                    }).then(() => {
+                    this.loading = false;
+                });
             },
             resetForm() {
                 this.fetchData();
@@ -91,10 +95,9 @@
                         text: 'The form contains errors. Please correct them.'
                     });
                 });
-                // update record
-
             },
             displayErorrs(errors) {
+                this.errors.clear();
                 for (let [fieldName, messages] of Object.entries(errors)) {
                     this.errors.add({
                         field: fieldName,

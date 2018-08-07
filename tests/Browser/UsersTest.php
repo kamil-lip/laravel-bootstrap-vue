@@ -26,12 +26,12 @@ class UsersTest extends DuskTestCase
 
             $browser->loginAs($user)
                 ->visit('/users')
-                ->waitFor('.main-nav')
+                ->waitFor('#resource-list-page')
                 ->click('[href="/users"]')
                 ->assertPathIs('/users')
                 // test filtering
-                ->waitFor('.resource-list .filter')
-                ->type('.resource-list .filter', $user->email)
+                ->waitFor('#resource-list-page .filter')
+                ->type('#resource-list-page .filter', $user->email)
                 ->pause(1000)
                 // we should see user's email in the first row of the table:
                 ->assertSeeIn('.user-list-table tbody tr:first-child td:nth-child(3)', $user->email);;
@@ -71,8 +71,8 @@ class UsersTest extends DuskTestCase
                 ->press('Submit')
                 // user should be listed in the table
                 ->waitForLocation('/users')
-                ->waitFor('.resource-list .filter')
-                ->type('.resource-list .filter', $userData['email'])
+                ->waitFor('#resource-list-page .filter')
+                ->type('#resource-list-page .filter', $userData['email'])
                 ->pause(500)
                 ->waitFor('.user-list-table')
                 ->assertSeeIn('.user-list-table tbody tr:first-child td:nth-child(2)', $userData['name'])
@@ -145,8 +145,8 @@ class UsersTest extends DuskTestCase
                 // all fields should be required
                 ->visit('/users')
                 ->waitFor('.main-nav')
-                ->waitFor('.resource-list .filter')
-                ->type('.resource-list .filter', $differentUser->email)
+                ->waitFor('#resource-list-page .filter')
+                ->type('#resource-list-page .filter', $differentUser->email)
                 ->pause(500)
                 ->waitFor('.user-list-table')
                 ->waitForText($differentUser->name)
@@ -158,9 +158,9 @@ class UsersTest extends DuskTestCase
                 ->press('Update')
                 // go back to user list
                 ->clickLink('Users')
-                ->waitFor('.resource-list .filter')
+                ->waitFor('#resource-list-page .filter')
                 // user should be the only one on the list
-                ->type('.resource-list .filter', 'amendedemail@jedddtsomedomain.com')
+                ->type('#resource-list-page .filter', 'amendedemail@jedddtsomedomain.com')
                 ->pause(500)
                 ->waitFor('.user-list-table')// wait for data to be loaded
 
