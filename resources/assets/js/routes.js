@@ -2,6 +2,7 @@ import ResourceList from './components/CRUD/List';
 import EditResource from './components/CRUD/Edit';
 import ResourceCreate from './components/CRUD/Create';
 import Dashboard from './components/pages/Dashboard';
+import PageNotFound from './components/common/PageNotFound';
 /**
  * route list
  * @type {*[]}
@@ -31,4 +32,8 @@ export default [
         props: { resourceName: 'users' },
         name: 'users.create'
     },
+    {
+        path: "*",
+        component: PageNotFound
+    }
 ];
