@@ -1,5 +1,5 @@
 <template>
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar main-nav">
+    <nav class="col-sm-3 col-lg-2 bg-light sidebar main-nav px-2">
 
         <b-nav vertical>
             <b-nav-item :to="{ name: 'home' }" exact><i class="fas fa-home"></i> Home</b-nav-item>

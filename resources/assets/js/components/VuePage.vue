@@ -1,6 +1,6 @@
 <template>
     <transition name="fade">
-    <main role="main" class="lbv-page col-md-10 ml-sm-auto col-lg-10 px-4">
+    <main role="main" class="lbv-page col-sm-9 ml-sm-auto col-lg-10 px-4">
         <transition name="fade">
             <slot v-if="!loading"></slot>
         </transition>
