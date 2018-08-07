@@ -1,6 +1,6 @@
 <template>
-    <vue-page id="resource-list-page" :loading="false">
-        <div v-if="data !== null">
+    <vue-page id="resource-list-page">
+        <div>
             <b-breadcrumb :items="breadcrumbItems"/>
             <h1>{{ resourceName.toUpperCase() }}</h1>
             <hr/>
@@ -34,6 +34,7 @@
             </div>
             <b-alert show v-if="!loading && data.total === 0">No results matching your search criteria found.
             </b-alert>
+            <block-loader class="block-loader align-self-center justify-content-center" v-if="loading"></block-loader>
         </div>
     </vue-page>
 </template>
@@ -41,8 +42,13 @@
 <script>
     import axios from 'axios';
     import debounce from 'v-debounce';
+    import BlockLoader from '../../common/BlockLoader';
 
     export default {
+
+        components: {
+            BlockLoader
+        },
         directives: {
             debounce
         },
@@ -138,3 +144,10 @@
         }
     }
 </script>
+
+
+<style>
+    #resource-list-page .block-loader {
+        height: 400px;
+    }
+</style>
