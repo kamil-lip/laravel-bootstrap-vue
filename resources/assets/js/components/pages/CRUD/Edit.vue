@@ -41,7 +41,7 @@
                     to: {name: 'home'}
                 }, {
                     text: 'Users',
-                    to: {name: 'users.index'}
+                    to: {name: 'resource.index', resource: this.$route.params.resource}
                 }, {
                     text: this.data.name,
                     active: true
@@ -64,7 +64,7 @@
 
                         if (response.status === 404) {
                             message = 'User does not exist.';
-                            this.$router.replace({name: 'users.index'});
+                            this.$router.replace({name: 'resource.index', resource: this.$route.params.resource});
                         }
 
                         this.$notify({

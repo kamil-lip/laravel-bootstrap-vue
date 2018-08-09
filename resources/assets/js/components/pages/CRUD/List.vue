@@ -4,7 +4,7 @@
             <b-breadcrumb :items="breadcrumbItems"/>
             <h1>{{ resourceName.toUpperCase() }}</h1>
             <hr/>
-            <b-button variant="primary" :to="{ name: 'users.create' }"><i class="fas fa-user-plus"></i> New user
+            <b-button variant="primary" :to="{ name: 'resource.create', params: { resource: $route.params.resource } }"><i class="fas fa-user-plus"></i> New user
             </b-button>
             <div class="my-3 clearfix">
                 <b-pagination-nav class="float-right" :use-router="true" :link-gen="pagLinkGen"
@@ -20,7 +20,7 @@
                 <b-table class="user-list-table" striped hover :items="data.data" :fields="tableFields">
                     <template slot="actions" slot-scope="row">
                         <b-button size="sm" variant="primary"
-                                  :to="{ name: 'users.edit', params: { id: row.item.id }}">
+                                  :to="{ name: 'resource.edit', params: { id: row.item.id, resource: $route.params.resource }}">
                             <i class="fas fa-user-edit"></i> Edit
                         </b-button>
                         <b-button size="sm" @click.stop="handleDeleteRecordClick(row.item)" variant="danger">
@@ -64,7 +64,7 @@
                     to: {name: 'home'}
                 }, {
                     text: 'Users',
-                    to: {name: 'users.index'}
+                    to: {name: 'resource.index', resource: this.$route.params.resource}
                 }],
                 filter: '',
                 filterDelay: 400,
@@ -74,13 +74,13 @@
         watch: {
             $route(route) {
                 // don't fetch data if we are leaving index page
-                if (route.name === 'users.index') {
+                if (route.name === 'resource.index' ) {
                     this.fetchPageData();
                 }
             },
             filter() {
                 // after filtering than can be less pages so lets navigate to the first page
-                this.$router.replace({name: 'users.index'});
+                this.$router.replace({name: 'resource.index', params: { resource: this.$route.params.resource }});
                 this.fetchPageData();
             }
         },
@@ -101,9 +101,12 @@
             },
             pagLinkGen(pageNum) {
                 return {
-                    name: 'users.index',
+                    name: 'resource.index',
                     query: {
                         page: pageNum
+                    },
+                    params: {
+                        resource: { resource: this.$route.params.resource }
                     }
                 }
             }

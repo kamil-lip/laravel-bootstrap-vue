@@ -40,7 +40,7 @@
                     to: {name: 'home'}
                 }, {
                     text: 'Users',
-                    to: {name: 'users.index'}
+                    to: {name: 'resource.index', resource: this.$route.params.resource}
                 }, {
                     text: 'Create',
                     active: true
@@ -61,7 +61,7 @@
                 let path = '/api' + S(this.$route.fullPath).chompRight("/create").s;
                 axios.post(path, this.data)
                     .then(() => {
-                        this.$router.push({name: 'users.index'});
+                        this.$router.push({name: 'resource.index', resource: this.$route.params.resource});
                         this.$notify({
                             group: 'app',
                             type: 'success',

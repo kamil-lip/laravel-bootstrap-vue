@@ -26,7 +26,7 @@
                 menuItems: [
                     {
                         iconClass: 'fas fa-users',
-                        to: { name: 'users.index'},
+                        to: { name: 'resource.index', params: {resource: 'users'} },
                         label: 'Users',
                     }
                 ]

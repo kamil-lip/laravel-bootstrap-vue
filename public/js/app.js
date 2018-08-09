@@ -35288,7 +35288,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(83);
-module.exports = __webpack_require__(271);
+module.exports = __webpack_require__(272);
 
 
 /***/ }),
@@ -35301,9 +35301,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__routes__ = __webpack_require__(227);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_common_LeftNav__ = __webpack_require__(263);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_common_LeftNav__ = __webpack_require__(264);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_common_LeftNav___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_common_LeftNav__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_VuePage__ = __webpack_require__(266);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_VuePage__ = __webpack_require__(267);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_VuePage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_VuePage__);
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -77539,10 +77539,15 @@ module.exports = function spread(callback) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_pages_Dashboard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_pages_Dashboard__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_common_PageNotFound__ = __webpack_require__(260);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_common_PageNotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_common_PageNotFound__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__crud_resources__ = __webpack_require__(263);
 
 
 
 
+
+
+
+var crudResourceRegex = '(' + __WEBPACK_IMPORTED_MODULE_5__crud_resources__["a" /* default */].join('|') + ')';
 
 /**
  * route list
@@ -77553,22 +77558,26 @@ module.exports = function spread(callback) {
     component: __WEBPACK_IMPORTED_MODULE_3__components_pages_Dashboard___default.a,
     props: { resourceName: 'home' },
     name: 'home'
-}, {
-    path: '/users',
+},
+// --- START OF CRUD ROUTES
+{
+    path: '/:resource' + crudResourceRegex,
     component: __WEBPACK_IMPORTED_MODULE_0__components_pages_CRUD_List___default.a,
     props: { resourceName: 'users' },
-    name: 'users.index'
+    name: 'resource.index'
 }, {
-    path: '/users/:id/edit',
+    path: '/:resource' + crudResourceRegex + '/:id/edit',
     component: __WEBPACK_IMPORTED_MODULE_1__components_pages_CRUD_Edit___default.a,
     props: { resourceName: 'users' },
-    name: 'users.edit'
+    name: 'resource.edit'
 }, {
-    path: '/users/create',
+    path: '/:resource' + crudResourceRegex + '/create',
     component: __WEBPACK_IMPORTED_MODULE_2__components_pages_CRUD_Create___default.a,
     props: { resourceName: 'users' },
-    name: 'users.create'
-}, {
+    name: 'resource.create'
+},
+// --- END OF CRUD ROUTES
+{
     path: "*",
     component: __WEBPACK_IMPORTED_MODULE_4__components_common_PageNotFound___default.a
 }]);
@@ -77775,7 +77784,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 to: { name: 'home' }
             }, {
                 text: 'Users',
-                to: { name: 'users.index' }
+                to: { name: 'resource.index', resource: this.$route.params.resource }
             }],
             filter: '',
             filterDelay: 400,
@@ -77786,13 +77795,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     watch: {
         $route: function $route(route) {
             // don't fetch data if we are leaving index page
-            if (route.name === 'users.index') {
+            if (route.name === 'resource.index') {
                 this.fetchPageData();
             }
         },
         filter: function filter() {
             // after filtering than can be less pages so lets navigate to the first page
-            this.$router.replace({ name: 'users.index' });
+            this.$router.replace({ name: 'resource.index', params: { resource: this.$route.params.resource } });
             this.fetchPageData();
         }
     },
@@ -77814,9 +77823,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         pagLinkGen: function pagLinkGen(pageNum) {
             return {
-                name: 'users.index',
+                name: 'resource.index',
                 query: {
                     page: pageNum
+                },
+                params: {
+                    resource: { resource: this.$route.params.resource }
                 }
             };
         },
@@ -78122,7 +78134,15 @@ var render = function() {
             _vm._v(" "),
             _c(
               "b-button",
-              { attrs: { variant: "primary", to: { name: "users.create" } } },
+              {
+                attrs: {
+                  variant: "primary",
+                  to: {
+                    name: "resource.create",
+                    params: { resource: _vm.$route.params.resource }
+                  }
+                }
+              },
               [
                 _c("i", { staticClass: "fas fa-user-plus" }),
                 _vm._v(" New user\n        ")
@@ -78220,8 +78240,11 @@ var render = function() {
                                     size: "sm",
                                     variant: "primary",
                                     to: {
-                                      name: "users.edit",
-                                      params: { id: row.item.id }
+                                      name: "resource.edit",
+                                      params: {
+                                        id: row.item.id,
+                                        resource: _vm.$route.params.resource
+                                      }
                                     }
                                   }
                                 },
@@ -78409,7 +78432,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
                 to: { name: 'home' }
             }, {
                 text: 'Users',
-                to: { name: 'users.index' }
+                to: { name: 'resource.index', resource: this.$route.params.resource }
             }, {
                 text: this.data.name,
                 active: true
@@ -78432,7 +78455,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
                 if (response.status === 404) {
                     message = 'User does not exist.';
-                    _this.$router.replace({ name: 'users.index' });
+                    _this.$router.replace({ name: 'resource.index', resource: _this.$route.params.resource });
                 }
 
                 _this.$notify({
@@ -79307,7 +79330,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
                 to: { name: 'home' }
             }, {
                 text: 'Users',
-                to: { name: 'users.index' }
+                to: { name: 'resource.index', resource: this.$route.params.resource }
             }, {
                 text: 'Create',
                 active: true
@@ -79356,7 +79379,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
             var path = '/api' + __WEBPACK_IMPORTED_MODULE_1_string___default()(this.$route.fullPath).chompRight("/create").s;
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(path, this.data).then(function () {
-                _this.$router.push({ name: 'users.index' });
+                _this.$router.push({ name: 'resource.index', resource: _this.$route.params.resource });
                 _this.$notify({
                     group: 'app',
                     type: 'success',
@@ -79693,14 +79716,21 @@ if (false) {
 
 /***/ }),
 /* 263 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = (['users']);
+
+/***/ }),
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(6)
 /* script */
-var __vue_script__ = __webpack_require__(264)
+var __vue_script__ = __webpack_require__(265)
 /* template */
-var __vue_template__ = __webpack_require__(265)
+var __vue_template__ = __webpack_require__(266)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -79739,7 +79769,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 264 */
+/* 265 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79771,7 +79801,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             menuItems: [{
                 iconClass: 'fas fa-users',
-                to: { name: 'users.index' },
+                to: { name: 'resource.index', params: { resource: 'users' } },
                 label: 'Users'
             }]
         };
@@ -79779,7 +79809,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 265 */
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -79847,19 +79877,19 @@ if (false) {
 }
 
 /***/ }),
-/* 266 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(267)
+  __webpack_require__(268)
 }
 var normalizeComponent = __webpack_require__(6)
 /* script */
-var __vue_script__ = __webpack_require__(269)
+var __vue_script__ = __webpack_require__(270)
 /* template */
-var __vue_template__ = __webpack_require__(270)
+var __vue_template__ = __webpack_require__(271)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -79898,13 +79928,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 267 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(268);
+var content = __webpack_require__(269);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -79924,7 +79954,7 @@ if(false) {
 }
 
 /***/ }),
-/* 268 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)(false);
@@ -79938,7 +79968,7 @@ exports.push([module.i, "\n.lbv-page {\n    height: 100vh;\n}\n.lbv-page .block-
 
 
 /***/ }),
-/* 269 */
+/* 270 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79975,7 +80005,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 270 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -80019,7 +80049,7 @@ if (false) {
 }
 
 /***/ }),
-/* 271 */
+/* 272 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
