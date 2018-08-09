@@ -31,5 +31,5 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 // This match any route so it must be listed at the end of this file
 Route::middleware('auth')->group(function () {
-    Route::view('/{any}', 'common/vue')->where('any', '.*');
+    Route::view('/{any}', 'common/vue')->where('any', '[^\.]*');
 });
