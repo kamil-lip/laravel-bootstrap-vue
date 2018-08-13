@@ -106,11 +106,10 @@
                         page: pageNum
                     },
                     params: {
-                        resource: { resource: this.$route.params.resource }
+                        resource: this.$route.params.resource
                     }
                 }
-            }
-            ,
+            },
             deleteRecord(record) {
                 axios.delete(route(this.resourceName + '.destroy', {id: record.id}))
                     .then((response) => {
