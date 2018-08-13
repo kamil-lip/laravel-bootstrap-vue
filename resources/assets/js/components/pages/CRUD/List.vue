@@ -1,49 +1,51 @@
 <template>
-    <transition name="fade">
-        <div class="resource-list" v-if="data !== null">
+    <vue-page id="resource-list-page">
+        <div v-if="data !== null">
             <b-breadcrumb :items="breadcrumbItems"/>
             <h1>{{ resourceName.toUpperCase() }}</h1>
             <hr/>
-            <b-button variant="primary" :to="{ name: 'users.create' }"><i class="fas fa-user-plus"></i> New user
+            <b-button variant="primary" :to="{ name: 'resource.create', params: { resource: $route.params.resource } }"><i class="fas fa-user-plus"></i> New user
             </b-button>
-            <div class="my-4">
+            <div class="my-3 clearfix">
                 <b-pagination-nav class="float-right" :use-router="true" :link-gen="pagLinkGen"
                                   :number-of-pages="data.last_page"
-                                  v-model="data.current_page" align="right"/>
+                                  v-model="data.current_page" align="right" v-if="!loading && data.total > 0"/>
                 <b-form @submit.prevent class="form-inline float-left">
                     <label class="mr-sm-2">Filter</label>
                     <input class="form-control filter" placeholder="Type to search" v-model.lazy="filter"
                            v-debounce="filterDelay"/>
                 </b-form>
             </div>
-            <transition name="fade">
-                <div v-if="!loading">
-                    <b-table class="user-list-table" striped hover :items="data.data" :fields="tableFields">
-                        <template slot="actions" slot-scope="row">
-                            <b-button size="sm" variant="primary"
-                                      :to="{ name: 'users.edit', params: { id: row.item.id }}">
-                                <i class="fas fa-user-edit"></i> Edit
-                            </b-button>
-                            <b-button size="sm" @click.stop="handleDeleteRecordClick(row.item)" variant="danger">
-                                <i class="fas fa-user-minus"></i> Delete
-                            </b-button>
-                        </template>
-                    </b-table>
-                    <b-pagination-nav :use-router="true" :link-gen="pagLinkGen" :number-of-pages="data.last_page"
-                                      v-model="data.current_page" align="right"/>
-                </div>
-            </transition>
-            <block-loader class="block-loader" v-if="loading"></block-loader>
+            <div v-if="!loading && data.total > 0">
+                <b-table class="user-list-table" striped hover :items="data.data" :fields="tableFields">
+                    <template slot="actions" slot-scope="row">
+                        <b-button size="sm" variant="primary"
+                                  :to="{ name: 'resource.edit', params: { id: row.item.id, resource: $route.params.resource }}">
+                            <i class="fas fa-user-edit"></i> Edit
+                        </b-button>
+                        <b-button size="sm" @click.stop="handleDeleteRecordClick(row.item)" variant="danger">
+                            <i class="fas fa-user-minus"></i> Delete
+                        </b-button>
+                    </template>
+                </b-table>
+                <b-pagination-nav class="mb-3" :use-router="true" :link-gen="pagLinkGen"
+                                  :number-of-pages="data.last_page"
+                                  v-model="data.current_page" align="right"/>
+            </div>
+            <b-alert show v-if="!loading && data.total === 0">No results matching your search criteria found.
+            </b-alert>
+            <block-loader class="block-loader align-self-center justify-content-center" v-if="loading"></block-loader>
         </div>
-    </transition>
+    </vue-page>
 </template>
 
 <script>
     import axios from 'axios';
-    import BlockLoader from '../common/BlockLoader';
     import debounce from 'v-debounce';
+    import BlockLoader from '../../common/BlockLoader';
 
     export default {
+
         components: {
             BlockLoader
         },
@@ -62,7 +64,7 @@
                     to: {name: 'home'}
                 }, {
                     text: 'Users',
-                    to: {name: 'users.index'}
+                    to: {name: 'resource.index', resource: this.$route.params.resource}
                 }],
                 filter: '',
                 filterDelay: 400,
@@ -72,13 +74,13 @@
         watch: {
             $route(route) {
                 // don't fetch data if we are leaving index page
-                if (route.name === 'users.index') {
+                if (route.name === 'resource.index' ) {
                     this.fetchPageData();
                 }
             },
             filter() {
                 // after filtering than can be less pages so lets navigate to the first page
-                this.$router.replace({name: 'users.index'});
+                this.$router.replace({name: 'resource.index', params: { resource: this.$route.params.resource }});
                 this.fetchPageData();
             }
         },
@@ -99,9 +101,12 @@
             },
             pagLinkGen(pageNum) {
                 return {
-                    name: 'users.index',
+                    name: 'resource.index',
                     query: {
                         page: pageNum
+                    },
+                    params: {
+                        resource: { resource: this.$route.params.resource }
                     }
                 }
             }
@@ -143,15 +148,9 @@
     }
 </script>
 
-<style>
-    .resource-list {
-        position: relative;
-    }
 
-    .resource-list .block-loader {
-        position: absolute;
-        left: 50%;
-        top: 300px;
-        margin-left: -100px;
+<style>
+    #resource-list-page .block-loader {
+        height: 400px;
     }
 </style>

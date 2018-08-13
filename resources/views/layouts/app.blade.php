@@ -35,10 +35,7 @@
     <div class="container-fluid">
         <div class="row">
             <left-nav></left-nav>
-
-            <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
-                @yield('content')
-            </main>
+            @yield('content')
         </div>
         <notifications group="app" position="top right"></notifications>
         <yes-no-dialog></yes-no-dialog>

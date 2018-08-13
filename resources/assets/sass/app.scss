@@ -7,6 +7,7 @@
 @import '~bootstrap-vue/dist/bootstrap-vue.css';
 @import 'nav';
 @import 'transitions';
+@import 'pagination';
 
 .navbar-laravel {
   background-color: #fff;
@@ -15,6 +16,7 @@
 
 main {
   padding-top: 68px;
+  padding-bottom: 2rem;
 }
 
 .notifications {

@@ -28,12 +28,8 @@ $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
+
+// This match any route so it must be listed at the end of this file
 Route::middleware('auth')->group(function () {
-    // CRUD
-    Route::resource('users', 'UserController')->only([
-        'index',
-        'edit',
-        'show',
-        'create'
-    ]);
+    Route::view('/{any}', 'common/vue')->where('any', '[^\.]*');
 });

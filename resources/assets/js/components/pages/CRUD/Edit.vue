@@ -1,5 +1,5 @@
 <template>
-    <transition name="fade">
+    <vue-page id="resource-edit-page" :loading="loading">
         <div v-if="data !== null && rules !== null">
             <b-breadcrumb :items="breadcrumbItems"/>
             <h1>Edit user</h1>
@@ -14,7 +14,7 @@
                 </b-row>
             </resource-form>
         </div>
-    </transition>
+    </vue-page>
 </template>
 
 <script>
@@ -30,7 +30,8 @@
             return {
                 data: null,
                 validated: false,
-                rules: null
+                rules: null,
+                loading: false
             }
         },
         computed: {
@@ -40,7 +41,7 @@
                     to: {name: 'home'}
                 }, {
                     text: 'Users',
-                    to: {name: 'users.index'}
+                    to: {name: 'resource.index', resource: this.$route.params.resource}
                 }, {
                     text: this.data.name,
                     active: true
@@ -51,11 +52,31 @@
             fetchData() {
                 let path = '/api' + S(this.$route.fullPath).chompRight("/edit").s;
                 let config = {params: {rules: true}};
+                this.loading = true;
                 axios.get(path, config)
                     .then((response) => {
                         this.data = response.data.data;
                         this.rules = response.data.rules;
                     })
+                    .catch((error) => {
+                        let response = error.response;
+                        let message = 'An error occurred. Please refresh.';
+
+                        if (response.status === 404) {
+                            message = 'User does not exist.';
+                            this.$router.replace({name: 'resource.index', resource: this.$route.params.resource});
+                        }
+
+                        this.$notify({
+                            group: 'app',
+                            type: 'error',
+                            title: 'Error',
+                            text: message
+                        });
+
+                    }).then(() => {
+                    this.loading = false;
+                });
             },
             resetForm() {
                 this.fetchData();
@@ -74,10 +95,9 @@
                         text: 'The form contains errors. Please correct them.'
                     });
                 });
-                // update record
-
             },
             displayErorrs(errors) {
+                this.errors.clear();
                 for (let [fieldName, messages] of Object.entries(errors)) {
                     this.errors.add({
                         field: fieldName,

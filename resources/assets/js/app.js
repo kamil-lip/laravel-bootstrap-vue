@@ -10,12 +10,14 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import routes from './routes';
 import LeftNav from './components/common/LeftNav';
-
+import VuePage from './components/VuePage'
 
 const router = new VueRouter({
     mode: 'history',
     routes
 });
+
+Vue.component('vue-page', VuePage)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

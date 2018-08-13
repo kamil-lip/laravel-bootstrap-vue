@@ -10784,11 +10784,7 @@ a.text-dark:focus {
 .sidebar {
   -webkit-box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
           box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
-  position: fixed;
-  top: 55px;
-  bottom: 0;
-  left: 0;
-  padding: 20px 0 0;
+  padding: 68px 0 0;
 }
 
 .sidebar .nav-link {
@@ -10821,6 +10817,10 @@ a.text-dark:focus {
   opacity: 0;
 }
 
+nav > ul.pagination {
+  margin-bottom: 0;
+}
+
 .navbar-laravel {
   background-color: #fff;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -10829,6 +10829,7 @@ a.text-dark:focus {
 
 main {
   padding-top: 68px;
+  padding-bottom: 2rem;
 }
 
 .notifications {
