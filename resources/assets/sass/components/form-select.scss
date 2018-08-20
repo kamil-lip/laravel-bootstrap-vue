@@ -1,0 +1,16 @@
+.v-select.form-select {
+
+    .dropdown-toggle {
+        background: #fff;
+        border-color: rgba(82, 166, 183, .39);
+    }
+
+    input[type=search], input[type=search]:focus {
+        padding: 0.375rem 0.75rem;
+    }
+
+    .selected-tag {
+        margin-left: 0.35rem;
+    }
+
+}

@@ -77539,7 +77539,8 @@ module.exports = function spread(callback) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_pages_Dashboard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_pages_Dashboard__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_common_PageNotFound__ = __webpack_require__(259);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_common_PageNotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_common_PageNotFound__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__crud_resources__ = __webpack_require__(262);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__routes_books__ = __webpack_require__(278);
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 
 
@@ -77547,40 +77548,41 @@ module.exports = function spread(callback) {
 
 
 
-var crudResourceRegex = '(' + __WEBPACK_IMPORTED_MODULE_5__crud_resources__["a" /* default */].join('|') + ')';
+
 
 /**
  * route list
  * @type {*[]}
  */
-/* harmony default export */ __webpack_exports__["a"] = ([{
+var routes = [{
     path: '/',
     component: __WEBPACK_IMPORTED_MODULE_3__components_pages_Dashboard___default.a,
     props: { resourceName: 'home' },
     name: 'home'
 },
-// --- START OF CRUD ROUTES
+// --- START OF CRUD ROUTES FOR USERS
 {
-    path: '/:resource' + crudResourceRegex,
+    path: '/users',
     component: __WEBPACK_IMPORTED_MODULE_0__components_pages_CRUD_List___default.a,
-    props: { resourceName: 'users' },
-    name: 'resource.index'
+    name: 'user.index'
 }, {
-    path: '/:resource' + crudResourceRegex + '/:id/edit',
+    path: '/users/:id/edit',
     component: __WEBPACK_IMPORTED_MODULE_1__components_pages_CRUD_Edit___default.a,
-    props: { resourceName: 'users' },
-    name: 'resource.edit'
+    name: 'user.edit'
 }, {
-    path: '/:resource' + crudResourceRegex + '/create',
+    path: '/users/create',
     component: __WEBPACK_IMPORTED_MODULE_2__components_pages_CRUD_Create___default.a,
-    props: { resourceName: 'users' },
-    name: 'resource.create'
+    name: 'user.create'
 },
 // --- END OF CRUD ROUTES
 {
     path: "*",
     component: __WEBPACK_IMPORTED_MODULE_4__components_common_PageNotFound___default.a
-}]);
+}];
+
+routes.push.apply(routes, _toConsumableArray(__WEBPACK_IMPORTED_MODULE_5__routes_books__["a" /* default */]));
+
+/* harmony default export */ __webpack_exports__["a"] = (routes);
 
 /***/ }),
 /* 228 */
@@ -77784,7 +77786,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 to: { name: 'home' }
             }, {
                 text: 'Users',
-                to: { name: 'resource.index', resource: this.$route.params.resource }
+                to: { name: 'user.index', resource: this.$route.params.resource }
             }],
             filter: '',
             filterDelay: 400,
@@ -77795,13 +77797,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     watch: {
         $route: function $route(route) {
             // don't fetch data if we are leaving index page
-            if (route.name === 'resource.index') {
+            if (route.name === 'user.index') {
                 this.fetchPageData();
             }
         },
         filter: function filter() {
             // after filtering than can be less pages so lets navigate to the first page
-            this.$router.replace({ name: 'resource.index', params: { resource: this.$route.params.resource } });
+            this.$router.replace({ name: 'user.index', params: { resource: this.$route.params.resource } });
             this.fetchPageData();
         }
     },
@@ -77823,7 +77825,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         pagLinkGen: function pagLinkGen(pageNum) {
             return {
-                name: 'resource.index',
+                name: 'user.index',
                 query: {
                     page: pageNum
                 },
@@ -78128,7 +78130,7 @@ var render = function() {
           [
             _c("b-breadcrumb", { attrs: { items: _vm.breadcrumbItems } }),
             _vm._v(" "),
-            _c("h1", [_vm._v(_vm._s(_vm.resourceName.toUpperCase()))]),
+            _c("h1", [_vm._v("Users")]),
             _vm._v(" "),
             _c("hr"),
             _vm._v(" "),
@@ -78138,7 +78140,7 @@ var render = function() {
                 attrs: {
                   variant: "primary",
                   to: {
-                    name: "resource.create",
+                    name: "user.create",
                     params: { resource: _vm.$route.params.resource }
                   }
                 }
@@ -78240,7 +78242,7 @@ var render = function() {
                                     size: "sm",
                                     variant: "primary",
                                     to: {
-                                      name: "resource.edit",
+                                      name: "user.edit",
                                       params: {
                                         id: row.item.id,
                                         resource: _vm.$route.params.resource
@@ -78432,7 +78434,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
                 to: { name: 'home' }
             }, {
                 text: 'Users',
-                to: { name: 'resource.index', resource: this.$route.params.resource }
+                to: { name: 'user.index', resource: this.$route.params.resource }
             }, {
                 text: this.data.name,
                 active: true
@@ -78455,7 +78457,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
                 if (response.status === 404) {
                     message = 'User does not exist.';
-                    _this.$router.replace({ name: 'resource.index', resource: _this.$route.params.resource });
+                    _this.$router.replace({ name: 'user.index', resource: _this.$route.params.resource });
                 }
 
                 _this.$notify({
@@ -78729,7 +78731,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select__ = __webpack_require__(250);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_select__);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components_form_input_form_input__["a"]; });
-/* unused harmony reexport FormSelect */
+/* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1_vue_select___default.a; });
 
 
 
@@ -79116,7 +79118,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
                 to: { name: 'home' }
             }, {
                 text: 'Users',
-                to: { name: 'resource.index', resource: this.$route.params.resource }
+                to: { name: 'user.index', resource: this.$route.params.resource }
             }, {
                 text: 'Create',
                 active: true
@@ -79165,7 +79167,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
             var path = '/api' + __WEBPACK_IMPORTED_MODULE_1_string___default()(this.$route.fullPath).chompRight("/create").s;
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(path, this.data).then(function () {
-                _this.$router.push({ name: 'resource.index', resource: _this.$route.params.resource });
+                _this.$router.push({ name: 'user.index', resource: _this.$route.params.resource });
                 _this.$notify({
                     group: 'app',
                     type: 'success',
@@ -79501,13 +79503,7 @@ if (false) {
 }
 
 /***/ }),
-/* 262 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = (['users']);
-
-/***/ }),
+/* 262 */,
 /* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -79587,8 +79583,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             menuItems: [{
                 iconClass: 'fas fa-users',
-                to: { name: 'resource.index', params: { resource: 'users' } },
+                to: { name: 'user.index', params: { resource: 'users' } },
                 label: 'Users'
+            }, {
+                iconClass: 'fas fa-book',
+                to: { name: 'book.index', params: { resource: 'books' } },
+                label: 'Books'
             }]
         };
     }
@@ -79970,6 +79970,1393 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-c8bdf630", module.exports)
+  }
+}
+
+/***/ }),
+/* 277 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(8)
+/* script */
+var __vue_script__ = __webpack_require__(286)
+/* template */
+var __vue_template__ = __webpack_require__(287)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/pages/Books/common/Form.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-b3c6d99e", Component.options)
+  } else {
+    hotAPI.reload("data-v-b3c6d99e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 278 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_pages_Books_List__ = __webpack_require__(279);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_pages_Books_List___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_pages_Books_List__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_pages_Books_Edit__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_pages_Books_Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_pages_Books_Edit__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_pages_Books_Create__ = __webpack_require__(289);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_pages_Books_Create___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_pages_Books_Create__);
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ([
+// --- START OF CRUD ROUTES
+{
+    path: '/books',
+    component: __WEBPACK_IMPORTED_MODULE_0__components_pages_Books_List___default.a,
+    name: 'book.index'
+}, {
+    path: '/books/:id/edit',
+    component: __WEBPACK_IMPORTED_MODULE_1__components_pages_Books_Edit___default.a,
+    name: 'book.edit'
+}, {
+    path: '/books/create',
+    component: __WEBPACK_IMPORTED_MODULE_2__components_pages_Books_Create___default.a,
+    name: 'book.create'
+}]);
+
+/***/ }),
+/* 279 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(280)
+}
+var normalizeComponent = __webpack_require__(8)
+/* script */
+var __vue_script__ = __webpack_require__(282)
+/* template */
+var __vue_template__ = __webpack_require__(283)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/pages/Books/List.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0035c765", Component.options)
+  } else {
+    hotAPI.reload("data-v-0035c765", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 280 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(281);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(39)("2eb5038e", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0035c765\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./List.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0035c765\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./List.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 281 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(13)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n#resource-list-page .block-loader {\n    height: 400px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 282 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_v_debounce__ = __webpack_require__(233);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_v_debounce___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_v_debounce__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_BlockLoader__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_BlockLoader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__common_BlockLoader__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    components: {
+        BlockLoader: __WEBPACK_IMPORTED_MODULE_2__common_BlockLoader___default.a
+    },
+    directives: {
+        debounce: __WEBPACK_IMPORTED_MODULE_1_v_debounce___default.a
+    },
+    data: function data() {
+        return {
+            data: null,
+            tableFields: ["id", "name", "author.name", "actions"],
+            breadcrumbItems: [{
+                text: 'Home',
+                to: { name: 'home' }
+            }, {
+                text: 'Books',
+                to: { name: 'book.index' }
+            }],
+            filter: '',
+            filterDelay: 400,
+            loading: false
+        };
+    },
+
+    watch: {
+        $route: function $route(route) {
+            // don't fetch data if we are leaving index page
+            if (route.name === 'book.index') {
+                this.fetchPageData();
+            }
+        },
+        filter: function filter() {
+            // after filtering than can be less pages so lets navigate to the first page
+            this.$router.replace({ name: 'book.index' });
+            this.fetchPageData();
+        }
+    },
+    methods: {
+        fetchPageData: function fetchPageData() {
+            var _this = this;
+
+            this.loading = true;
+            var params = {
+                with: 'author'
+            };
+            if (this.filter.length > 0) {
+                params['filter'] = this.filter;
+            }
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/api' + this.$route.fullPath, { params: params }).then(function (response) {
+                _this.data = response.data;
+            }).then(function () {
+                // always executed
+                _this.loading = false;
+            });
+        },
+        pagLinkGen: function pagLinkGen(pageNum) {
+            return {
+                name: 'book.index',
+                query: {
+                    page: pageNum
+                }
+            };
+        },
+        deleteRecord: function deleteRecord(record) {
+            var _this2 = this;
+
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(route('book.destroy', { id: record.id })).then(function (response) {
+                var records = _this2.data.data;
+                var recordIdx = records.findIndex(function (rec) {
+                    return rec.id === response.data.id;
+                });
+                if (recordIdx > -1) {
+                    records.splice(recordIdx, 1);
+                    _this2.fetchPageData();
+                    _this2.$notify({
+                        group: 'app',
+                        type: 'success',
+                        title: 'Success',
+                        text: 'Record has been deleted successfully'
+                    });
+                }
+            });
+        },
+        handleDeleteRecordClick: function handleDeleteRecordClick(record) {
+            var _this3 = this;
+
+            this.$confirm('Are you sure?').then(function (confirmed) {
+                if (confirmed) {
+                    _this3.deleteRecord(record);
+                }
+            });
+        }
+    },
+
+    mounted: function mounted() {
+        this.fetchPageData();
+    }
+});
+
+/***/ }),
+/* 283 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("vue-page", { attrs: { id: "resource-list-page" } }, [
+    _vm.data !== null
+      ? _c(
+          "div",
+          [
+            _c("b-breadcrumb", { attrs: { items: _vm.breadcrumbItems } }),
+            _vm._v(" "),
+            _c("h1", [_vm._v("Books")]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c(
+              "b-button",
+              { attrs: { variant: "primary", to: { name: "book.create" } } },
+              [
+                _c("i", { staticClass: "fas fa-user-plus" }),
+                _vm._v(" New book\n        ")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "my-3 clearfix" },
+              [
+                !_vm.loading && _vm.data.total > 0
+                  ? _c("b-pagination-nav", {
+                      staticClass: "float-right",
+                      attrs: {
+                        "use-router": true,
+                        "link-gen": _vm.pagLinkGen,
+                        "number-of-pages": _vm.data.last_page,
+                        align: "right"
+                      },
+                      model: {
+                        value: _vm.data.current_page,
+                        callback: function($$v) {
+                          _vm.$set(_vm.data, "current_page", $$v)
+                        },
+                        expression: "data.current_page"
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "b-form",
+                  {
+                    staticClass: "form-inline float-left",
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                      }
+                    }
+                  },
+                  [
+                    _c("label", { staticClass: "mr-sm-2" }, [_vm._v("Filter")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model.lazy",
+                          value: _vm.filter,
+                          expression: "filter",
+                          modifiers: { lazy: true }
+                        },
+                        {
+                          name: "debounce",
+                          rawName: "v-debounce",
+                          value: _vm.filterDelay,
+                          expression: "filterDelay"
+                        }
+                      ],
+                      staticClass: "form-control filter",
+                      attrs: { placeholder: "Type to search" },
+                      domProps: { value: _vm.filter },
+                      on: {
+                        change: function($event) {
+                          _vm.filter = $event.target.value
+                        }
+                      }
+                    })
+                  ]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            !_vm.loading && _vm.data.total > 0
+              ? _c(
+                  "div",
+                  [
+                    _c("b-table", {
+                      staticClass: "book-list-table",
+                      attrs: {
+                        striped: "",
+                        hover: "",
+                        items: _vm.data.data,
+                        fields: _vm.tableFields
+                      },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "actions",
+                          fn: function(row) {
+                            return [
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: {
+                                    size: "sm",
+                                    variant: "primary",
+                                    to: {
+                                      name: "book.edit",
+                                      params: { id: row.item.id }
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", { staticClass: "fas fa-edit" }),
+                                  _vm._v(" Edit\n                    ")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: { size: "sm", variant: "danger" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.stopPropagation()
+                                      _vm.handleDeleteRecordClick(row.item)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", { staticClass: "fas fa-user-minus" }),
+                                  _vm._v(" Delete\n                    ")
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _c("b-pagination-nav", {
+                      staticClass: "mb-3",
+                      attrs: {
+                        "use-router": true,
+                        "link-gen": _vm.pagLinkGen,
+                        "number-of-pages": _vm.data.last_page,
+                        align: "right"
+                      },
+                      model: {
+                        value: _vm.data.current_page,
+                        callback: function($$v) {
+                          _vm.$set(_vm.data, "current_page", $$v)
+                        },
+                        expression: "data.current_page"
+                      }
+                    })
+                  ],
+                  1
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            !_vm.loading && _vm.data.total === 0
+              ? _c("b-alert", { attrs: { show: "" } }, [
+                  _vm._v(
+                    "No results matching your search criteria found.\n        "
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.loading
+              ? _c("block-loader", {
+                  staticClass:
+                    "block-loader align-self-center justify-content-center"
+                })
+              : _vm._e()
+          ],
+          1
+        )
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0035c765", module.exports)
+  }
+}
+
+/***/ }),
+/* 284 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(8)
+/* script */
+var __vue_script__ = __webpack_require__(285)
+/* template */
+var __vue_template__ = __webpack_require__(288)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/pages/Books/Edit.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0f7deed1", Component.options)
+  } else {
+    hotAPI.reload("data-v-0f7deed1", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 285 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_string__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_string___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_string__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_Form__ = __webpack_require__(277);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_Form___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__common_Form__);
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        resourceForm: __WEBPACK_IMPORTED_MODULE_2__common_Form___default.a
+    },
+    data: function data() {
+        return {
+            data: null,
+            validated: false,
+            rules: null,
+            loading: false
+        };
+    },
+
+    computed: {
+        breadcrumbItems: function breadcrumbItems() {
+            return this.data ? [{
+                text: 'Home',
+                to: { name: 'home' }
+            }, {
+                text: 'Books',
+                to: { name: 'book.index', resource: this.$route.params.resource }
+            }, {
+                text: this.data.name,
+                active: true
+            }] : [];
+        }
+    },
+    methods: {
+        fetchData: function fetchData() {
+            var _this = this;
+
+            var path = '/api' + __WEBPACK_IMPORTED_MODULE_1_string___default()(this.$route.fullPath).chompRight("/edit").s;
+            var config = { params: { rules: true } };
+            this.loading = true;
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(path, config).then(function (response) {
+                _this.data = response.data.data;
+                _this.rules = response.data.rules;
+            }).catch(function (error) {
+                var response = error.response;
+                var message = 'An error occurred. Please refresh.';
+
+                if (response.status === 404) {
+                    message = 'Book does not exist.';
+                    _this.$router.replace({ name: 'book.index', resource: _this.$route.params.resource });
+                }
+
+                _this.$notify({
+                    group: 'app',
+                    type: 'error',
+                    title: 'Error',
+                    text: message
+                });
+            }).then(function () {
+                _this.loading = false;
+            });
+        },
+        resetForm: function resetForm() {
+            this.fetchData();
+        },
+        submit: function submit() {
+            var _this2 = this;
+
+            this.$validator.validate().then(function (result) {
+                _this2.validated = true;
+                if (result) {
+                    _this2.updateData();
+                    return;
+                }
+                _this2.$notify({
+                    group: 'app',
+                    type: 'error',
+                    title: 'Error',
+                    text: 'The form contains errors. Please correct them.'
+                });
+            });
+        },
+        displayErorrs: function displayErorrs(errors) {
+            this.errors.clear();
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = Object.entries(errors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var _ref = _step.value;
+
+                    var _ref2 = _slicedToArray(_ref, 2);
+
+                    var fieldName = _ref2[0];
+                    var messages = _ref2[1];
+
+                    this.errors.add({
+                        field: fieldName,
+                        msg: messages[0]
+                    });
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+        },
+        updateData: function updateData() {
+            var _this3 = this;
+
+            var path = '/api' + __WEBPACK_IMPORTED_MODULE_1_string___default()(this.$route.fullPath).chompRight("/edit").s;
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.put(path, this.data).then(function (response) {
+                _this3.data = response.data;
+                _this3.$notify({
+                    group: 'app',
+                    type: 'success',
+                    title: 'Success',
+                    text: 'Record has been updated successfully.'
+                });
+            }).catch(function (error) {
+                var response = error.response;
+                var message = 'An error occurred. Record has not been updated. Please try again.';
+
+                // check if the response contains validation errors (we can't rely on client side validation only)
+                if (response.status === 422 && response.data.errors !== undefined) {
+                    //display the errors
+                    _this3.displayErorrs(response.data.errors);
+                    message = 'The form contains errors. Please correct them.';
+                }
+
+                _this3.$notify({
+                    group: 'app',
+                    type: 'error',
+                    title: 'Error',
+                    text: message
+                });
+            });
+        }
+    },
+    mounted: function mounted() {
+        this.fetchData();
+    }
+});
+
+/***/ }),
+/* 286 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_form_FormRow__ = __webpack_require__(274);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_form_FormRow___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__common_form_FormRow__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_form__ = __webpack_require__(249);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    inject: {
+        $validator: '$validator'
+    },
+    data: function data() {
+        return {
+            users: null,
+            author: null
+        };
+    },
+
+    watch: {
+        author: function author(_author) {
+            this.record.author_id = _author === null ? null : _author.id;
+        },
+        users: function users(_users) {
+            var _this = this;
+
+            if (this.record && this.record.author_id !== null) {
+                this.author = _users.find(function (u) {
+                    return u.id === _this.record.author_id;
+                });
+            }
+        }
+    },
+    props: {
+        record: Object,
+        validated: {
+            type: Boolean,
+            default: false
+        },
+        rules: {
+            type: Object,
+            default: null
+        }
+    },
+    components: {
+        FormInput: __WEBPACK_IMPORTED_MODULE_1__common_form__["a" /* FormInput */],
+        FormSelect: __WEBPACK_IMPORTED_MODULE_1__common_form__["b" /* FormSelect */],
+        FormRow: __WEBPACK_IMPORTED_MODULE_0__common_form_FormRow___default.a
+    },
+    methods: {
+        fetchUsers: function fetchUsers() {
+            var _this2 = this;
+
+            this.loading = true;
+            var params = { columns: ['id', 'name'], paginate: 0 };
+            axios.get('/api/users', { params: params }).then(function (response) {
+                _this2.users = response.data;
+            }).then(function () {
+                // always executed
+                _this2.loading = false;
+            });
+        }
+    },
+    mounted: function mounted() {
+        this.fetchUsers();
+    }
+});
+
+/***/ }),
+/* 287 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.rules && _vm.users
+    ? _c(
+        "b-form",
+        {
+          attrs: { validated: _vm.validated, novalidate: "" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              $event.stopPropagation()
+              _vm.$emit("submit")
+            }
+          }
+        },
+        [
+          _c(
+            "form-row",
+            { attrs: { field: "name" } },
+            [
+              _c(
+                "label",
+                { attrs: { slot: "label", for: "name" }, slot: "label" },
+                [_vm._v("Name:")]
+              ),
+              _vm._v(" "),
+              _c("form-input", {
+                directives: [
+                  {
+                    name: "validate",
+                    rawName: "v-validate",
+                    value: _vm.rules.name,
+                    expression: "rules.name"
+                  }
+                ],
+                attrs: {
+                  slot: "component",
+                  autocomplete: "name",
+                  name: "name",
+                  id: "name",
+                  state: _vm.errors.has("name") ? false : null
+                },
+                slot: "component",
+                model: {
+                  value: _vm.record.name,
+                  callback: function($$v) {
+                    _vm.$set(_vm.record, "name", $$v)
+                  },
+                  expression: "record.name"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "form-row",
+            { attrs: { field: "author" } },
+            [
+              _c(
+                "label",
+                { attrs: { slot: "label", for: "author" }, slot: "label" },
+                [_vm._v("Author:")]
+              ),
+              _vm._v(" "),
+              _c("form-select", {
+                directives: [
+                  {
+                    name: "validate",
+                    rawName: "v-validate",
+                    value: _vm.rules.author_id,
+                    expression: "rules.author_id"
+                  }
+                ],
+                staticClass: "form-select",
+                attrs: {
+                  slot: "component",
+                  autocomplete: "author",
+                  name: "author",
+                  id: "author",
+                  label: "name",
+                  placeholder: "Unknown",
+                  options: _vm.users,
+                  state: _vm.errors.has("author") ? false : null
+                },
+                slot: "component",
+                model: {
+                  value: _vm.author,
+                  callback: function($$v) {
+                    _vm.author = $$v
+                  },
+                  expression: "author"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-row",
+            { staticClass: "my-2" },
+            [
+              _c("b-col", { attrs: { sm: "12", md: "8" } }, [
+                _vm.validated && _vm.errors.any()
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "alert alert-warning",
+                        attrs: { role: "alert" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                The form contains errors. Please correct them.\n            "
+                        )
+                      ]
+                    )
+                  : _vm._e()
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _vm._t("buttons")
+        ],
+        2
+      )
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-b3c6d99e", module.exports)
+  }
+}
+
+/***/ }),
+/* 288 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "vue-page",
+    { attrs: { id: "resource-edit-page", loading: _vm.loading } },
+    [
+      _vm.data !== null && _vm.rules !== null
+        ? _c(
+            "div",
+            [
+              _c("b-breadcrumb", { attrs: { items: _vm.breadcrumbItems } }),
+              _vm._v(" "),
+              _c("h1", [_vm._v("Edit book")]),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c(
+                "resource-form",
+                {
+                  attrs: {
+                    rules: _vm.rules,
+                    record: _vm.data,
+                    validated: _vm.validated
+                  },
+                  on: { submit: _vm.submit }
+                },
+                [
+                  _c(
+                    "b-row",
+                    {
+                      staticClass: "my-2",
+                      attrs: { slot: "buttons" },
+                      slot: "buttons"
+                    },
+                    [
+                      _c(
+                        "b-col",
+                        { staticClass: "text-right", attrs: { md: "8" } },
+                        [
+                          _c(
+                            "b-button",
+                            {
+                              attrs: { type: "reset", variant: "danger" },
+                              on: { click: _vm.resetForm }
+                            },
+                            [_vm._v("Reset")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-button",
+                            { attrs: { type: "submit", variant: "primary" } },
+                            [_vm._v("Update")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        : _vm._e()
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0f7deed1", module.exports)
+  }
+}
+
+/***/ }),
+/* 289 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(8)
+/* script */
+var __vue_script__ = __webpack_require__(290)
+/* template */
+var __vue_template__ = __webpack_require__(291)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/pages/Books/Create.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-44b14903", Component.options)
+  } else {
+    hotAPI.reload("data-v-44b14903", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 290 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_string__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_string___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_string__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_Form__ = __webpack_require__(277);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_Form___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__common_Form__);
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        resourceForm: __WEBPACK_IMPORTED_MODULE_2__common_Form___default.a
+    },
+    data: function data() {
+        return {
+            data: {
+                name: '',
+                author_id: ''
+            },
+            rules: null,
+            validated: false,
+            loading: false,
+            breadcrumbItems: [{
+                text: 'Home',
+                to: { name: 'home' }
+            }, {
+                text: 'Books',
+                to: { name: 'book.index' }
+            }, {
+                text: 'Create',
+                active: true
+            }]
+        };
+    },
+
+    methods: {
+        displayErorrs: function displayErorrs(errors) {
+            this.errors.clear();
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = Object.entries(errors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var _ref = _step.value;
+
+                    var _ref2 = _slicedToArray(_ref, 2);
+
+                    var fieldName = _ref2[0];
+                    var messages = _ref2[1];
+
+                    this.errors.add({
+                        field: fieldName,
+                        msg: messages[0]
+                    });
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+        },
+        saveData: function saveData() {
+            var _this = this;
+
+            var path = '/api' + __WEBPACK_IMPORTED_MODULE_1_string___default()(this.$route.fullPath).chompRight("/create").s;
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(path, this.data).then(function () {
+                _this.$router.push({ name: 'book.index' });
+                _this.$notify({
+                    group: 'app',
+                    type: 'success',
+                    title: 'Success',
+                    text: 'Record has created successfully.'
+                });
+            }).catch(function (error) {
+                var response = error.response;
+                var message = 'An error occurred. Record has not been saved.';
+
+                // check if the response contains validation errors (we can't rely on client side validation only)
+                if (response.status === 422 && response.data.errors !== undefined) {
+                    //display the errors
+                    _this.displayErorrs(response.data.errors);
+                    message = 'The form contains errors. Please correct them and try again.';
+                }
+
+                _this.$notify({
+                    group: 'app',
+                    type: 'error',
+                    title: 'Error',
+                    text: message
+                });
+            });
+        },
+        submit: function submit() {
+            var _this2 = this;
+
+            // validate first
+            this.$validator.validate().then(function (result) {
+                _this2.validated = true;
+                if (result) {
+                    _this2.saveData();
+                    return;
+                }
+                _this2.$notify({
+                    group: 'app',
+                    type: 'error',
+                    title: 'Error',
+                    text: 'The form contains errors. Please correct them.'
+                });
+            });
+        },
+        fetchValidationRules: function fetchValidationRules() {
+            var _this3 = this;
+
+            var path = '/api' + this.$route.fullPath.replace('/create', '/validation/rules');
+            var params = { action: 'create' };
+            this.loading = true;
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(path, { params: params }).then(function (response) {
+                _this3.rules = response.data;
+            }).then(function () {
+                _this3.loading = false;
+            });
+        }
+    },
+    mounted: function mounted() {
+        this.fetchValidationRules();
+    }
+});
+
+/***/ }),
+/* 291 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "vue-page",
+    { attrs: { id: "resource-create-page", loading: _vm.loading } },
+    [
+      _vm.rules !== null
+        ? _c(
+            "div",
+            [
+              _c("b-breadcrumb", { attrs: { items: _vm.breadcrumbItems } }),
+              _vm._v(" "),
+              _c("h1", [_vm._v("New book")]),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c(
+                "resource-form",
+                {
+                  attrs: {
+                    rules: _vm.rules,
+                    password: true,
+                    validated: _vm.validated,
+                    record: _vm.data
+                  },
+                  on: { submit: _vm.submit }
+                },
+                [
+                  _c(
+                    "b-row",
+                    {
+                      staticClass: "my-2",
+                      attrs: { slot: "buttons" },
+                      slot: "buttons"
+                    },
+                    [
+                      _c(
+                        "b-col",
+                        { staticClass: "text-right", attrs: { md: "8" } },
+                        [
+                          _c(
+                            "b-button",
+                            {
+                              attrs: {
+                                type: "submit",
+                                variant: "primary",
+                                disabled: _vm.errors.any()
+                              }
+                            },
+                            [_vm._v("Submit")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        : _vm._e()
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-44b14903", module.exports)
   }
 }
 

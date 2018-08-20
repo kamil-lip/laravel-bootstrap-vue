@@ -10821,6 +10821,20 @@ nav > ul.pagination {
   margin-bottom: 0;
 }
 
+.v-select.form-select .dropdown-toggle {
+  background: #fff;
+  border-color: rgba(82, 166, 183, 0.39);
+}
+
+.v-select.form-select input[type=search],
+.v-select.form-select input[type=search]:focus {
+  padding: 0.375rem 0.75rem;
+}
+
+.v-select.form-select .selected-tag {
+  margin-left: 0.35rem;
+}
+
 .navbar-laravel {
   background-color: #fff;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);

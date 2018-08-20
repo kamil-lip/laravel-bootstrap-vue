@@ -2,27 +2,26 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Validation\Veevalidate\SimpleRulesTranslator;
+use App\Book;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
 use App\Validation\Veevalidate\RulesTranslatorInterface;
+use App\Validation\Veevalidate\SimpleRulesTranslator;
 
-class UserController extends Controller
+class BookController extends Controller
 {
     /**
      * @var array validation rules which applies to both: create and update
      */
     protected $rules = [
-        'name' => 'required|min:5',
-        'email' => 'required|email|unique:users,email'
+        'name' => 'required|max:255'
     ];
 
     /**
      * @var array rules which only applies to new records.
      */
     protected $createRules = [
-        'password' => 'required|min:8'
+
     ];
 
     /**
@@ -35,17 +34,18 @@ class UserController extends Controller
     {
         $columns = $request->input('columns', ['*']);
 
-        $query = User::query();
+        $query = Book::query();
 
         if ($request->has('filter')) {
             $filter = $request->input('filter');
             // TODO: replace it with scout compatible solution
-            $query = $query->where('name', 'LIKE', "%$filter%")->orWhere('email', 'LIKE', "%$filter%");
+            $query = $query->where('name', 'LIKE', "%$filter%");
         }
 
         if ($request->has('with')) {
             $query = $query->with($request->input('with'));
         }
+
         return $request->input('paginate', true) ? $query->paginate(20, $columns) : $query->get($columns);
     }
 
@@ -59,12 +59,12 @@ class UserController extends Controller
     {
         $request->validate(array_merge($this->rules, $this->createRules));
 
-        $user = new User();
+        $book = new Book();
         $data = $request->all();
-        $data['password'] = bcrypt($data['password']);
-        $user->fill($data);
-        $user->save();
-        return $user;
+
+        $book->fill($data);
+        $book->save();
+        return $book;
     }
 
     /**
@@ -77,12 +77,12 @@ class UserController extends Controller
      */
     public function show($id, Request $request, SimpleRulesTranslator $rulesTranslator)
     {
-        $user = User::findOrFail($id);
+        $book = Book::findOrFail($id);
         if ($request->input('rules', false)) {
             $rules = $rulesTranslator->translate($this->rules);
-            return ['data' => $user, 'rules' => $rules];
+            return ['data' => $book, 'rules' => $rules];
         } else {
-            return $user;
+            return $book;
         }
     }
 
@@ -95,13 +95,11 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->rules['email'] .= ",$id";
-
         $request->validate($this->rules);
 
-        $user = User::find($id);
-        $user->update($request->all());
-        return $user;
+        $book = Book::find($id);
+        $book->update($request->all());
+        return $book;
     }
 
     /**
@@ -112,9 +110,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->delete();
-        return $user;
+        $book = Book::find($id);
+        $book->delete();
+        return $book;
     }
 
     /**

@@ -4,38 +4,34 @@ import ResourceCreate from './components/pages/CRUD/Create';
 import Dashboard from './components/pages/Dashboard';
 import PageNotFound from './components/common/PageNotFound';
 
-import crudResources from './crud_resources';
-let crudResourceRegex = '(' + crudResources.join('|') + ')';
+import bookRoutes from './routes/books';
 
 /**
  * route list
  * @type {*[]}
  */
-export default [
+const routes = [
     {
         path: '/',
         component: Dashboard,
         props: { resourceName: 'home' },
         name: 'home'
     },
-    // --- START OF CRUD ROUTES
+    // --- START OF CRUD ROUTES FOR USERS
     {
-        path: `/:resource${crudResourceRegex}`,
+        path: `/users`,
         component: ResourceList,
-        props: { resourceName: 'users' },
-        name: 'resource.index'
+        name: 'user.index'
     },
     {
-        path: `/:resource${crudResourceRegex}/:id/edit`,
+        path: `/users/:id/edit`,
         component: EditResource,
-        props: { resourceName: 'users' },
-        name: 'resource.edit'
+        name: 'user.edit'
     },
     {
-        path: `/:resource${crudResourceRegex}/create`,
+        path: `/users/create`,
         component: ResourceCreate,
-        props: { resourceName: 'users' },
-        name: 'resource.create'
+        name: 'user.create'
     },
     // --- END OF CRUD ROUTES
     {
@@ -43,3 +39,9 @@ export default [
         component: PageNotFound
     }
 ];
+
+
+
+routes.push(...bookRoutes);
+
+export default routes;

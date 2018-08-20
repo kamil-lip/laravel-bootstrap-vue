@@ -26,8 +26,13 @@
                 menuItems: [
                     {
                         iconClass: 'fas fa-users',
-                        to: { name: 'resource.index', params: {resource: 'users'} },
+                        to: { name: 'user.index', params: {resource: 'users'} },
                         label: 'Users',
+                    },
+                    {
+                        iconClass: 'fas fa-book',
+                        to: { name: 'book.index', params: {resource: 'books'} },
+                        label: 'Books',
                     }
                 ]
             }

@@ -2,7 +2,7 @@
     <vue-page id="resource-create-page" :loading="loading">
         <div v-if="rules !== null">
             <b-breadcrumb :items="breadcrumbItems"/>
-            <h1>New user</h1>
+            <h1>New book</h1>
             <hr/>
             <resource-form :rules="rules" :password="true" :validated="validated" :record="data"
                            @submit="submit">
@@ -29,8 +29,7 @@
             return {
                 data: {
                     name: '',
-                    email: '',
-                    password: ''
+                    author_id: ''
                 },
                 rules: null,
                 validated: false,
@@ -39,8 +38,8 @@
                     text: 'Home',
                     to: {name: 'home'}
                 }, {
-                    text: 'Users',
-                    to: {name: 'user.index', resource: this.$route.params.resource}
+                    text: 'Books',
+                    to: {name: 'book.index'}
                 }, {
                     text: 'Create',
                     active: true
@@ -61,7 +60,7 @@
                 let path = '/api' + S(this.$route.fullPath).chompRight("/create").s;
                 axios.post(path, this.data)
                     .then(() => {
-                        this.$router.push({name: 'user.index', resource: this.$route.params.resource});
+                        this.$router.push({name: 'book.index'});
                         this.$notify({
                             group: 'app',
                             type: 'success',

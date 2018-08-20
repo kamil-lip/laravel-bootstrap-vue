@@ -1,10 +1,10 @@
 <template>
     <vue-page id="resource-list-page">
         <div v-if="data !== null">
-            <b-breadcrumb :items="breadcrumbItems"/>
-            <h1>Users</h1>
+            <b-breadcrumb :items="breadcrumbItems" />
+            <h1>Books</h1>
             <hr/>
-            <b-button variant="primary" :to="{ name: 'user.create', params: { resource: $route.params.resource } }"><i class="fas fa-user-plus"></i> New user
+            <b-button variant="primary" :to="{ name: 'book.create' }"><i class="fas fa-user-plus"></i> New book
             </b-button>
             <div class="my-3 clearfix">
                 <b-pagination-nav class="float-right" :use-router="true" :link-gen="pagLinkGen"
@@ -17,11 +17,11 @@
                 </b-form>
             </div>
             <div v-if="!loading && data.total > 0">
-                <b-table class="user-list-table" striped hover :items="data.data" :fields="tableFields">
+                <b-table class="book-list-table" striped hover :items="data.data" :fields="tableFields">
                     <template slot="actions" slot-scope="row">
                         <b-button size="sm" variant="primary"
-                                  :to="{ name: 'user.edit', params: { id: row.item.id, resource: $route.params.resource }}">
-                            <i class="fas fa-user-edit"></i> Edit
+                                  :to="{ name: 'book.edit', params: { id: row.item.id }}">
+                            <i class="fas fa-edit"></i> Edit
                         </b-button>
                         <b-button size="sm" @click.stop="handleDeleteRecordClick(row.item)" variant="danger">
                             <i class="fas fa-user-minus"></i> Delete
@@ -52,19 +52,16 @@
         directives: {
             debounce
         },
-        props: {
-            resourceName: String
-        },
         data() {
             return {
                 data: null,
-                tableFields: ["id", "name", "email", "created_at", "updated_at", "actions"],
+                tableFields: ["id", "name", "author.name", "actions"],
                 breadcrumbItems: [{
                     text: 'Home',
                     to: {name: 'home'}
                 }, {
-                    text: 'Users',
-                    to: {name: 'user.index', resource: this.$route.params.resource}
+                    text: 'Books',
+                    to: {name: 'book.index'}
                 }],
                 filter: '',
                 filterDelay: 400,
@@ -74,20 +71,22 @@
         watch: {
             $route(route) {
                 // don't fetch data if we are leaving index page
-                if (route.name === 'user.index' ) {
+                if (route.name === 'book.index' ) {
                     this.fetchPageData();
                 }
             },
             filter() {
                 // after filtering than can be less pages so lets navigate to the first page
-                this.$router.replace({name: 'user.index', params: { resource: this.$route.params.resource }});
+                this.$router.replace({name: 'book.index'});
                 this.fetchPageData();
             }
         },
         methods: {
             fetchPageData() {
                 this.loading = true;
-                let params = {};
+                let params = {
+                    with: 'author'
+                };
                 if (this.filter.length > 0) {
                     params['filter'] = this.filter;
                 }
@@ -101,18 +100,15 @@
             },
             pagLinkGen(pageNum) {
                 return {
-                    name: 'user.index',
+                    name: 'book.index',
                     query: {
                         page: pageNum
-                    },
-                    params: {
-                        resource: { resource: this.$route.params.resource }
                     }
                 }
             }
             ,
             deleteRecord(record) {
-                axios.delete(route(this.resourceName + '.destroy', {id: record.id}))
+                axios.delete(route('book.destroy', {id: record.id}))
                     .then((response) => {
                         let records = this.data.data;
                         let recordIdx = records.findIndex((rec) => {

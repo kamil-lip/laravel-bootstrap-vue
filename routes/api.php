@@ -30,4 +30,14 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('/users/validation/rules', 'API\UserController@validationRules')->name('users.validation-rules');
 
+    Route::resource('books', 'API\BookController')->only([
+        'index',
+        'update',
+        'show',
+        'destroy',
+        'store'
+    ]);
+
+    Route::get('/books/validation/rules', 'API\BookController@validationRules')->name('books.validation-rules');
+
 });

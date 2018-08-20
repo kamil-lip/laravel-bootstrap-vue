@@ -2,7 +2,7 @@
     <vue-page id="resource-edit-page" :loading="loading">
         <div v-if="data !== null && rules !== null">
             <b-breadcrumb :items="breadcrumbItems"/>
-            <h1>Edit user</h1>
+            <h1>Edit book</h1>
             <hr/>
             <resource-form :rules="rules" :record="data" :validated="validated"
                            @submit="submit">
@@ -40,8 +40,8 @@
                     text: 'Home',
                     to: {name: 'home'}
                 }, {
-                    text: 'Users',
-                    to: {name: 'user.index', resource: this.$route.params.resource}
+                    text: 'Books',
+                    to: {name: 'book.index', resource: this.$route.params.resource}
                 }, {
                     text: this.data.name,
                     active: true
@@ -63,8 +63,8 @@
                         let message = 'An error occurred. Please refresh.';
 
                         if (response.status === 404) {
-                            message = 'User does not exist.';
-                            this.$router.replace({name: 'user.index', resource: this.$route.params.resource});
+                            message = 'Book does not exist.';
+                            this.$router.replace({name: 'book.index', resource: this.$route.params.resource});
                         }
 
                         this.$notify({
