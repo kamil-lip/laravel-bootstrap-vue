@@ -80267,7 +80267,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         deleteRecord: function deleteRecord(record) {
             var _this2 = this;
 
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(route('book.destroy', { id: record.id })).then(function (response) {
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(route('books.destroy', { id: record.id })).then(function (response) {
                 var records = _this2.data.data;
                 var recordIdx = records.findIndex(function (rec) {
                     return rec.id === response.data.id;

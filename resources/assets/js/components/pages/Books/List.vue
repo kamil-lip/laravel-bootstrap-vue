@@ -108,7 +108,7 @@
             }
             ,
             deleteRecord(record) {
-                axios.delete(route('book.destroy', {id: record.id}))
+                axios.delete(route('books.destroy', {id: record.id}))
                     .then((response) => {
                         let records = this.data.data;
                         let recordIdx = records.findIndex((rec) => {
