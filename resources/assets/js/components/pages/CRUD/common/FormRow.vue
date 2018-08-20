@@ -5,6 +5,7 @@
         </b-col>
         <b-col sm="10" md="6">
             <slot name="component"></slot>
+            <div class="invalid-feedback" v-show="errors.has(field)">{{ errors.first(field) }}</div>
         </b-col>
     </b-row>
 </template>
@@ -15,7 +16,7 @@
             $validator: '$validator'
         },
         props: {
-            for: {
+            field: {
                 type: String,
                 default: null
             },
