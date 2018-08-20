@@ -30,7 +30,7 @@
 </template>
 
 <script>
-    import FormRow from './FormRow';
+    import FormRow from '../../../common/form/FormRow';
     import {FormInput} from '../../../common/form';
 
     export default {
