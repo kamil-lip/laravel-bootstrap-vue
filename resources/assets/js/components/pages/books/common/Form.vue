@@ -13,13 +13,9 @@
                          v-model="author" :options="books" v-validate="rules.author_id"
                          :state="errors.has('author') ? false : null"></form-select>
         </form-row>
-        <b-row class="my-2">
-            <b-col sm="12" md="8">
-                <div class="alert alert-warning" role="alert" v-if="validated && errors.any()">
-                    The form contains errors. Please correct them.
-                </div>
-            </b-col>
-        </b-row>
+        <div class="alert alert-warning" role="alert" v-if="validated && errors.any()">
+            The form contains errors. Please correct them.
+        </div>
         <slot name="buttons"></slot>
     </b-form>
 </template>
@@ -43,7 +39,7 @@
                 this.record.author_id = author ? author.id : null;
             },
             books(books) {
-                if(this.record && this.record.author_id !== null) {
+                if (this.record && this.record.author_id !== null) {
                     this.author = books.find(u => u.id === this.record.author_id);
                 }
             }

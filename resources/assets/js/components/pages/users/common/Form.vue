@@ -18,13 +18,9 @@
                         :state="errors.has('password') ? false : null" v-validate="rules.password"
                         v-model="record.password"></form-input>
         </form-row>
-        <b-row class="my-2">
-            <b-col sm="12" md="8">
-                <div class="alert alert-warning" role="alert" v-if="validated && errors.any()">
-                    The form contains errors. Please correct them.
-                </div>
-            </b-col>
-        </b-row>
+        <div class="alert alert-warning my-2" role="alert" v-if="validated && errors.any()">
+            The form contains errors. Please correct them.
+        </div>
         <slot name="buttons"></slot>
     </b-form>
 </template>
