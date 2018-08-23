@@ -9,8 +9,8 @@ require('./bootstrap');
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import routes from './routes';
-import LeftNav from './components/common/LeftNav';
-import VuePage from './components/VuePage'
+import VuePage from './components/VuePage';
+import App from './components/layouts/App';
 
 const router = new VueRouter({
     mode: 'history',
@@ -28,7 +28,8 @@ Vue.component('vue-page', VuePage)
 new Vue({
     el: '#app',
     router,
+    template: '<app />',
     components: {
-        LeftNav
+        App
     }
 });

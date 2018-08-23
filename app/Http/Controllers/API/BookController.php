@@ -77,7 +77,11 @@ class BookController extends Controller
      */
     public function show($id, Request $request, SimpleRulesTranslator $rulesTranslator)
     {
-        $book = Book::findOrFail($id);
+        $query = Book::query();
+        if ($request->has('with')) {
+            $query->with($request->input('with'));
+        }
+        $book = $query->findOrFail($id);
         if ($request->input('rules', false)) {
             $rules = $rulesTranslator->translate($this->rules);
             return ['data' => $book, 'rules' => $rules];

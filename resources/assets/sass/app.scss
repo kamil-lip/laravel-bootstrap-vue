@@ -1,25 +1,30 @@
+// custom variables
+@import "variables";
+
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-// Variables
-@import "variables";
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+
+// CoreUI Icons Set
+@import '~@coreui/icons/css/coreui-icons.min.css';
+
+/* Import Font Awesome Icons Set */
+$fa-font-path: '~font-awesome/fonts/';
+@import '~font-awesome/scss/font-awesome.scss';
+
+/* Import Simple Line Icons Set */
+$simple-line-font-path: '~simple-line-icons/fonts/';
+@import '~simple-line-icons/scss/simple-line-icons.scss';
+
+/* Import Flag Icons Set */
+@import '~flag-icon-css/css/flag-icon.min.css';
+
+/* Import Bootstrap Vue Styles */
 @import '~bootstrap-vue/dist/bootstrap-vue.css';
-@import 'nav';
+
+@import "~@coreui/coreui/scss/coreui";
+
 @import 'transitions';
 @import 'pagination';
-@import './components/form-select.scss';
-
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-}
-
-main {
-  padding-top: 68px;
-  padding-bottom: 2rem;
-}
-
-.notifications {
-  margin: 68px 10px 0 0;
-}
+@import 'borders';
+@import './components/form-select';
+@import './components/notifications';

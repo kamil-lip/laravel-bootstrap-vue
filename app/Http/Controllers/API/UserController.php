@@ -77,7 +77,11 @@ class UserController extends Controller
      */
     public function show($id, Request $request, SimpleRulesTranslator $rulesTranslator)
     {
-        $user = User::findOrFail($id);
+        $query = User::query();
+        if ($request->has('with')) {
+            $query->with($request->input('with'));
+        }
+        $user = $query->findOrFail($id);
         if ($request->input('rules', false)) {
             $rules = $rulesTranslator->translate($this->rules);
             return ['data' => $user, 'rules' => $rules];

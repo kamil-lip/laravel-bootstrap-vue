@@ -1,9 +1,6 @@
-import ResourceList from './components/pages/CRUD/List';
-import EditResource from './components/pages/CRUD/Edit';
-import ResourceCreate from './components/pages/CRUD/Create';
 import Dashboard from './components/pages/Dashboard';
 import PageNotFound from './components/common/PageNotFound';
-
+import userRoutes from './routes/users';
 import bookRoutes from './routes/books';
 
 /**
@@ -12,35 +9,32 @@ import bookRoutes from './routes/books';
  */
 const routes = [
     {
+        name: 'home',
+        meta: {
+            label: 'Home'
+        },
+        component: {
+            render(c) {
+                return c('router-view')
+            }
+        },
         path: '/',
-        component: Dashboard,
-        props: { resourceName: 'home' },
-        name: 'home'
+        redirect: '/dashboard',
+        children: [
+            {
+                component: Dashboard,
+                path: 'dashboard',
+                name: 'dashboard'
+            },
+            ...userRoutes,
+            ...bookRoutes
+        ]
     },
-    // --- START OF CRUD ROUTES FOR USERS
-    {
-        path: `/users`,
-        component: ResourceList,
-        name: 'user.index'
-    },
-    {
-        path: `/users/:id/edit`,
-        component: EditResource,
-        name: 'user.edit'
-    },
-    {
-        path: `/users/create`,
-        component: ResourceCreate,
-        name: 'user.create'
-    },
-    // --- END OF CRUD ROUTES
     {
         path: "*",
         component: PageNotFound
     }
 ];
-
-
 
 routes.push(...bookRoutes);
 

@@ -1,23 +1,59 @@
-import BookList from '../components/pages/Books/List';
-import EditBook from '../components/pages/Books/Edit';
-import BookCreate from '../components/pages/Books/Create';
+import List from '../components/pages/books/List.vue';
+import Edit from '../components/pages/books/Edit.vue';
+import Create from '../components/pages/books/Create.vue';
+import View from '../components/pages/books/View.vue';
 
-export default [
-    // --- START OF CRUD ROUTES
-    {
-        path: `/books`,
-        component: BookList,
-        name: 'book.index'
+export default [{
+    path: 'books',
+    component: {
+        render(c) {
+            return c('router-view')
+        }
     },
-    {
-        path: `/books/:id/edit`,
-        component: EditBook,
-        name: 'book.edit'
+    meta: {
+        label: 'Books'
     },
-    {
-        path: `/books/create`,
-        component: BookCreate,
-        name: 'book.create'
-    },
-    // --- END OF CRUD ROUTES
-];
+    redirect: '/books',
+    children: [
+        {
+            path: '',
+            component: List,
+            name: 'books.index'
+        },
+        {
+            path: 'create',
+            component: Create,
+            name: 'books.create',
+            meta: {
+                label: 'Create'
+            }
+        },
+        {
+            path: ':id',
+            component: {
+                render(c) {
+                    return c('router-view')
+                }
+            },
+            meta: {
+                label: '⌛'
+            },
+            redirect: {name: 'books.show'},
+            children: [
+                {
+                    path: '',
+                    component: View,
+                    name: 'books.show'
+                },
+                {
+                    path: 'edit',
+                    component: Edit,
+                    name: 'books.edit',
+                    meta: {
+                        label: 'Edit'
+                    }
+                }
+            ]
+        }
+    ]
+}]
