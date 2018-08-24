@@ -115,6 +115,7 @@
                             title: 'Success',
                             text: 'Record has been updated successfully.'
                         });
+                        this.$router.push({name: 'users.show', params: {id: this.data.id}});
                     })
                     .catch((error) => {
                         let response = error.response;

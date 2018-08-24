@@ -82824,6 +82824,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
                     title: 'Success',
                     text: 'Record has been updated successfully.'
                 });
+                _this3.$router.push({ name: 'users.show', params: { id: _this3.data.id } });
             }).catch(function (error) {
                 var response = error.response;
                 var message = 'An error occurred. Record has not been updated. Please try again.';
@@ -84660,6 +84661,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
             var path = '/api' + __WEBPACK_IMPORTED_MODULE_1_string___default()(this.$route.fullPath).chompRight("/edit").s;
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.put(path, this.data).then(function (response) {
                 _this3.data = response.data;
+                _this3.$router.push({ name: 'books.show', params: { id: _this3.data.id } });
                 _this3.$notify({
                     group: 'app',
                     type: 'success',

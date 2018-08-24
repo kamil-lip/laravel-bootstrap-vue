@@ -106,6 +106,7 @@
                 axios.put(path, this.data)
                     .then((response) => {
                         this.data = response.data;
+                        this.$router.push({name: 'books.show', params: {id: this.data.id}});
                         this.$notify({
                             group: 'app',
                             type: 'success',
