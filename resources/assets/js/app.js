@@ -9,7 +9,7 @@ require('./bootstrap');
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import routes from './routes';
-import VuePage from './components/VuePage';
+import VuePage from './components/common/VuePage';
 import App from './components/layouts/App';
 import axios from 'axios';
 

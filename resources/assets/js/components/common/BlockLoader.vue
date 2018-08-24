@@ -1,5 +1,4 @@
 <template>
-    <div class="loader-wrap d-flex align-items-center justify-content-center flex-wrap">
         <svg width="200px" height="200px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
              preserveAspectRatio="xMidYMid" class="lds-ripple">
             <circle cx="50" cy="50" r="26.5737" fill="none"
@@ -19,7 +18,6 @@
                          keySplines="0.2 0 0.8 1" begin="0s" repeatCount="indefinite"></animate>
             </circle>
         </svg>
-    </div>
 </template>
 
 <script>

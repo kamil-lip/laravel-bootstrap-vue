@@ -146,10 +146,3 @@
         }
     }
 </script>
-
-
-<style>
-    #resource-list-page .block-loader {
-        height: 400px;
-    }
-</style>

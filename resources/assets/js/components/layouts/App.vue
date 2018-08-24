@@ -29,13 +29,6 @@
                 <DefaultAside/>
             </AppAside>
         </div>
-        <TheFooter>
-            <!--footer-->
-            <div class="ml-auto">
-                <span class="mr-1">Powered by</span>
-                <a href="https://coreui.io">CoreUI for Vue</a>
-            </div>
-        </TheFooter>
         <notifications group="app" position="top right"></notifications>
         <yes-no-dialog></yes-no-dialog>
     </div>
