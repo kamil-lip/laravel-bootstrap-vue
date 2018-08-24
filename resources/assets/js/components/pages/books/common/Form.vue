@@ -31,7 +31,7 @@
         data() {
             return {
                 author: null,
-                users: []
+                users: null
             }
         },
         watch: {
