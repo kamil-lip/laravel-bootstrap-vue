@@ -1,5 +1,5 @@
 <template>
-    <b-form :validated="validated" @submit.prevent.stop="$emit('submit')" novalidate v-if="rules && books">
+    <b-form :validated="validated" @submit.prevent.stop="$emit('submit')" novalidate v-if="rules && users">
         <form-row field="name">
             <label slot="label" for="name">Name:</label>
             <form-input slot="component" autocomplete="name" name="name" id="name"
@@ -10,7 +10,7 @@
             <label slot="label" for="author">Author:</label>
             <form-select class="form-select" slot="component" autocomplete="author" name="author" id="author"
                          label="name" placeholder="Unknown"
-                         v-model="author" :options="books" v-validate="rules.author_id"
+                         v-model="author" :options="users" v-validate="rules.author_id"
                          :state="errors.has('author') ? false : null"></form-select>
         </form-row>
         <div class="alert alert-warning" role="alert" v-if="validated && errors.any()">
@@ -30,18 +30,19 @@
         },
         data() {
             return {
-                books: null,
-                author: null
+                author: null,
+                users: null
             }
         },
         watch: {
             author(author) {
                 this.record.author_id = author ? author.id : null;
             },
-            books(books) {
-                if (this.record && this.record.author_id !== null) {
-                    this.author = books.find(u => u.id === this.record.author_id);
-                }
+            users() {
+                this.updateAuthor();
+            },
+            'record.author_id'() {
+                this.updateAuthor();
             }
         },
         props: {
@@ -61,20 +62,25 @@
             FormRow
         },
         methods: {
-            fetchBooks() {
+            fetchUsers() {
                 this.loading = true;
                 const params = {columns: ['id', 'name'], paginate: 0};
                 axios.get('/api/users', {params})
                     .then((response) => {
-                        this.books = response.data;
+                        this.users = response.data;
                     }).then(() => {
                     // always executed
                     this.loading = false
                 });
+            },
+            updateAuthor() {
+                if (this.record && this.record.author_id !== null) {
+                    this.author = this.users.find(u => u.id === this.record.author_id);
+                }
             }
         },
         mounted() {
-            this.fetchBooks();
+            this.fetchUsers();
         }
     }
 </script>
