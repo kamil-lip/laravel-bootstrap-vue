@@ -2,7 +2,7 @@
     <AppHeaderDropdown right no-caret>
         <template slot="header">
             <img
-                src="images/avatars/6.jpg"
+                src="/images/avatars/6.jpg"
                 class="img-avatar"
                 alt="kamil@appdiamond.pl" />
         </template>
