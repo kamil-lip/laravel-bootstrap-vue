@@ -11,6 +11,7 @@ import VueRouter from 'vue-router';
 import routes from './routes';
 import VuePage from './components/VuePage';
 import App from './components/layouts/App';
+import axios from 'axios';
 
 const router = new VueRouter({
     mode: 'history',
@@ -25,11 +26,40 @@ Vue.component('vue-page', VuePage)
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-new Vue({
+let app = new Vue({
     el: '#app',
     router,
     template: '<app />',
     components: {
         App
+    },
+    methods: {
+        setupAxios() {
+            axios.interceptors.response.use((response) => {
+                // Do something with response data
+                return response;
+            }, (error) => {
+
+                let response = error.response;
+
+                if (response.status === 401) {
+                    window.location.href = '/';
+                    this.$notify({
+                        group: 'app',
+                        type: 'error',
+                        title: 'Error',
+                        text: 'You are not authorized to perform this operation'
+                    });
+                    return false;
+                }
+
+                return Promise.reject(error);
+            });
+        }
+    },
+    created() {
+        this.setupAxios();
     }
 });
+
+

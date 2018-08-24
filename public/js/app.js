@@ -39463,6 +39463,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_VuePage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_VuePage__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_layouts_App__ = __webpack_require__(294);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_layouts_App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_layouts_App__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_axios__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -39470,6 +39472,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  */
 
 __webpack_require__(90);
+
 
 
 
@@ -39490,12 +39493,41 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('vue-page', __WEBPACK_IMPO
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
+var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
     router: router,
     template: '<app />',
     components: {
         App: __WEBPACK_IMPORTED_MODULE_4__components_layouts_App___default.a
+    },
+    methods: {
+        setupAxios: function setupAxios() {
+            var _this = this;
+
+            __WEBPACK_IMPORTED_MODULE_5_axios___default.a.interceptors.response.use(function (response) {
+                // Do something with response data
+                return response;
+            }, function (error) {
+
+                var response = error.response;
+
+                if (response.status === 401) {
+                    window.location.href = '/';
+                    _this.$notify({
+                        group: 'app',
+                        type: 'error',
+                        title: 'Error',
+                        text: 'You are not authorized to perform this operation'
+                    });
+                    return false;
+                }
+
+                return Promise.reject(error);
+            });
+        }
+    },
+    created: function created() {
+        this.setupAxios();
     }
 });
 
@@ -84028,15 +84060,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -84050,13 +84073,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     directives: {
         debounce: __WEBPACK_IMPORTED_MODULE_1_v_debounce___default.a
     },
-    props: {
-        resourceName: String
-    },
     data: function data() {
         return {
             data: null,
-            tableFields: ["id", "name", "author.name", "created_at", "updated_at", "actions"],
+            tableFields: ["id", "name", "author.name", "actions"],
+            breadcrumbItems: [{
+                text: 'Home',
+                to: { name: 'home' }
+            }, {
+                text: 'Books',
+                to: { name: 'book.index' }
+            }],
             filter: '',
             filterDelay: 400,
             loading: false
@@ -84066,13 +84093,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     watch: {
         $route: function $route(route) {
             // don't fetch data if we are leaving index page
-            if (route.name === 'books.index') {
+            if (route.name === 'book.index') {
                 this.fetchPageData();
             }
         },
         filter: function filter() {
             // after filtering than can be less pages so lets navigate to the first page
-            this.$router.replace({ name: 'books.index', params: { resource: this.$route.params.resource } });
+            this.$router.replace({ name: 'book.index' });
             this.fetchPageData();
         }
     },
@@ -84081,7 +84108,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             this.loading = true;
-            var params = { with: 'author' };
+            var params = {
+                with: 'author'
+            };
             if (this.filter.length > 0) {
                 params['filter'] = this.filter;
             }
@@ -84094,7 +84123,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         pagLinkGen: function pagLinkGen(pageNum) {
             return {
-                name: 'books.index',
+                name: 'book.index',
                 query: {
                     page: pageNum
                 }
@@ -84144,225 +84173,190 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "vue-page",
-    { attrs: { id: "resource-list-page" } },
-    [
-      _c(
-        "b-button",
-        { attrs: { variant: "primary mb-3", to: { name: "books.create" } } },
-        [_c("i", { staticClass: "fa fa-user-plus" }), _vm._v(" New book\n    ")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-header" }, [_vm._v("Books")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _vm.data !== null
-            ? _c(
-                "div",
-                [
-                  _c(
-                    "div",
-                    { staticClass: "mb-3 clearfix" },
-                    [
-                      !_vm.loading && _vm.data.total > 0
-                        ? _c("b-pagination-nav", {
-                            staticClass: "float-right",
-                            attrs: {
-                              "use-router": true,
-                              "link-gen": _vm.pagLinkGen,
-                              "number-of-pages": _vm.data.last_page,
-                              align: "right"
-                            },
-                            model: {
-                              value: _vm.data.current_page,
-                              callback: function($$v) {
-                                _vm.$set(_vm.data, "current_page", $$v)
-                              },
-                              expression: "data.current_page"
-                            }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c(
-                        "b-form",
-                        {
-                          staticClass: "form-inline float-left",
-                          on: {
-                            submit: function($event) {
-                              $event.preventDefault()
-                            }
-                          }
+  return _c("vue-page", { attrs: { id: "resource-list-page" } }, [
+    _vm.data !== null
+      ? _c(
+          "div",
+          [
+            _c("b-breadcrumb", { attrs: { items: _vm.breadcrumbItems } }),
+            _vm._v(" "),
+            _c("h1", [_vm._v("Books")]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c(
+              "b-button",
+              { attrs: { variant: "primary", to: { name: "book.create" } } },
+              [
+                _c("i", { staticClass: "fas fa-user-plus" }),
+                _vm._v(" New book\n        ")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "my-3 clearfix" },
+              [
+                !_vm.loading && _vm.data.total > 0
+                  ? _c("b-pagination-nav", {
+                      staticClass: "float-right",
+                      attrs: {
+                        "use-router": true,
+                        "link-gen": _vm.pagLinkGen,
+                        "number-of-pages": _vm.data.last_page,
+                        align: "right"
+                      },
+                      model: {
+                        value: _vm.data.current_page,
+                        callback: function($$v) {
+                          _vm.$set(_vm.data, "current_page", $$v)
                         },
-                        [
-                          _c("label", { staticClass: "mr-sm-2" }, [
-                            _vm._v("Filter")
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model.lazy",
-                                value: _vm.filter,
-                                expression: "filter",
-                                modifiers: { lazy: true }
-                              },
-                              {
-                                name: "debounce",
-                                rawName: "v-debounce",
-                                value: _vm.filterDelay,
-                                expression: "filterDelay"
-                              }
-                            ],
-                            staticClass: "form-control filter",
-                            attrs: { placeholder: "Type to search" },
-                            domProps: { value: _vm.filter },
-                            on: {
-                              change: function($event) {
-                                _vm.filter = $event.target.value
-                              }
-                            }
-                          })
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  !_vm.loading && _vm.data.total > 0
-                    ? _c(
-                        "div",
-                        [
-                          _c("b-table", {
-                            staticClass: "book-list-table",
-                            attrs: {
-                              striped: "",
-                              hover: "",
-                              items: _vm.data.data,
-                              fields: _vm.tableFields
-                            },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "actions",
-                                fn: function(row) {
-                                  return [
-                                    _c(
-                                      "b-button",
-                                      {
-                                        attrs: {
-                                          size: "sm",
-                                          variant: "success",
-                                          to: {
-                                            name: "books.show",
-                                            params: { id: row.item.id }
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c("i", { staticClass: "fa fa-eye" }),
-                                        _vm._v(
-                                          " View\n                            "
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "b-button",
-                                      {
-                                        attrs: {
-                                          size: "sm",
-                                          variant: "primary",
-                                          to: {
-                                            name: "books.edit",
-                                            params: { id: row.item.id }
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c("i", { staticClass: "fa fa-edit" }),
-                                        _vm._v(
-                                          " Edit\n                            "
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "b-button",
-                                      {
-                                        attrs: {
-                                          size: "sm",
-                                          variant: "danger"
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            $event.stopPropagation()
-                                            _vm.handleDeleteRecordClick(
-                                              row.item
-                                            )
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c("i", {
-                                          staticClass: "fa fa-user-minus"
-                                        }),
-                                        _vm._v(
-                                          " Delete\n                            "
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                }
-                              }
-                            ])
-                          }),
-                          _vm._v(" "),
-                          _c("b-pagination-nav", {
-                            staticClass: "mb-3",
-                            attrs: {
-                              "use-router": true,
-                              "link-gen": _vm.pagLinkGen,
-                              "number-of-pages": _vm.data.last_page,
-                              align: "right"
-                            },
-                            model: {
-                              value: _vm.data.current_page,
-                              callback: function($$v) {
-                                _vm.$set(_vm.data, "current_page", $$v)
-                              },
-                              expression: "data.current_page"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  !_vm.loading && _vm.data.total === 0
-                    ? _c("b-alert", { attrs: { show: "" } }, [
-                        _vm._v(
-                          "No results matching your search criteria found.\n                "
-                        )
+                        expression: "data.current_page"
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "b-form",
+                  {
+                    staticClass: "form-inline float-left",
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                      }
+                    }
+                  },
+                  [
+                    _c("label", { staticClass: "mr-sm-2" }, [_vm._v("Filter")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model.lazy",
+                          value: _vm.filter,
+                          expression: "filter",
+                          modifiers: { lazy: true }
+                        },
+                        {
+                          name: "debounce",
+                          rawName: "v-debounce",
+                          value: _vm.filterDelay,
+                          expression: "filterDelay"
+                        }
+                      ],
+                      staticClass: "form-control filter",
+                      attrs: { placeholder: "Type to search" },
+                      domProps: { value: _vm.filter },
+                      on: {
+                        change: function($event) {
+                          _vm.filter = $event.target.value
+                        }
+                      }
+                    })
+                  ]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            !_vm.loading && _vm.data.total > 0
+              ? _c(
+                  "div",
+                  [
+                    _c("b-table", {
+                      staticClass: "book-list-table",
+                      attrs: {
+                        striped: "",
+                        hover: "",
+                        items: _vm.data.data,
+                        fields: _vm.tableFields
+                      },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "actions",
+                          fn: function(row) {
+                            return [
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: {
+                                    size: "sm",
+                                    variant: "primary",
+                                    to: {
+                                      name: "book.edit",
+                                      params: { id: row.item.id }
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", { staticClass: "fas fa-edit" }),
+                                  _vm._v(" Edit\n                    ")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: { size: "sm", variant: "danger" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.stopPropagation()
+                                      _vm.handleDeleteRecordClick(row.item)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", { staticClass: "fas fa-user-minus" }),
+                                  _vm._v(" Delete\n                    ")
+                                ]
+                              )
+                            ]
+                          }
+                        }
                       ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.loading
-                    ? _c("block-loader", {
-                        staticClass:
-                          "block-loader align-self-center justify-content-center"
-                      })
-                    : _vm._e()
-                ],
-                1
-              )
-            : _vm._e()
-        ])
-      ])
-    ],
-    1
-  )
+                    }),
+                    _vm._v(" "),
+                    _c("b-pagination-nav", {
+                      staticClass: "mb-3",
+                      attrs: {
+                        "use-router": true,
+                        "link-gen": _vm.pagLinkGen,
+                        "number-of-pages": _vm.data.last_page,
+                        align: "right"
+                      },
+                      model: {
+                        value: _vm.data.current_page,
+                        callback: function($$v) {
+                          _vm.$set(_vm.data, "current_page", $$v)
+                        },
+                        expression: "data.current_page"
+                      }
+                    })
+                  ],
+                  1
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            !_vm.loading && _vm.data.total === 0
+              ? _c("b-alert", { attrs: { show: "" } }, [
+                  _vm._v(
+                    "No results matching your search criteria found.\n        "
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.loading
+              ? _c("block-loader", {
+                  staticClass:
+                    "block-loader align-self-center justify-content-center"
+                })
+              : _vm._e()
+          ],
+          1
+        )
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
