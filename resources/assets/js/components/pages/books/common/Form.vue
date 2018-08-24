@@ -31,7 +31,7 @@
         data() {
             return {
                 author: null,
-                users: null
+                users: []
             }
         },
         watch: {
@@ -41,7 +41,7 @@
             users() {
                 this.updateAuthor();
             },
-            'record.author_id'() {
+            'record'() {
                 this.updateAuthor();
             }
         },
@@ -74,7 +74,7 @@
                 });
             },
             updateAuthor() {
-                if (this.record && this.record.author_id !== null) {
+                if (this.users && this.record && this.record.author_id !== null) {
                     this.author = this.users.find(u => u.id === this.record.author_id);
                 }
             }

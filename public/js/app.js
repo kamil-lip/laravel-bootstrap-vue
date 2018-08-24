@@ -84736,7 +84736,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             author: null,
-            users: null
+            users: []
         };
     },
 
@@ -84747,7 +84747,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         users: function users() {
             this.updateAuthor();
         },
-        'record.author_id': function recordAuthor_id() {
+        'record': function record() {
             this.updateAuthor();
         }
     },
@@ -84783,7 +84783,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         updateAuthor: function updateAuthor() {
             var _this2 = this;
 
-            if (this.record && this.record.author_id !== null) {
+            if (this.users && this.record && this.record.author_id !== null) {
                 this.author = this.users.find(function (u) {
                     return u.id === _this2.record.author_id;
                 });
