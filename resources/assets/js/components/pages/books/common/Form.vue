@@ -35,8 +35,10 @@
             }
         },
         watch: {
-            author(author) {
-                this.record.author_id = author ? author.id : null;
+            'author'(author) {
+                if(author === null || author.id !== this.record.author_id) {
+                    this.record.author_id = author ? author.id : null;
+                }
             },
             users() {
                 this.updateAuthor();
@@ -74,8 +76,8 @@
                 });
             },
             updateAuthor() {
-                if (this.users && this.record && this.record.author_id !== null) {
-                    this.author = this.users.find(u => u.id === this.record.author_id);
+                if (this.users && this.record) {
+                    this.author = this.record.author_id === null ? null : this.users.find(u => u.id === this.record.author_id);
                 }
             }
         },

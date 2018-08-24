@@ -84741,8 +84741,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     watch: {
-        author: function author(_author) {
-            this.record.author_id = _author ? _author.id : null;
+        'author': function author(_author) {
+            if (_author === null || _author.id !== this.record.author_id) {
+                this.record.author_id = _author ? _author.id : null;
+            }
         },
         users: function users() {
             this.updateAuthor();
@@ -84783,8 +84785,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         updateAuthor: function updateAuthor() {
             var _this2 = this;
 
-            if (this.users && this.record && this.record.author_id !== null) {
-                this.author = this.users.find(function (u) {
+            if (this.users && this.record) {
+                this.author = this.record.author_id === null ? null : this.users.find(function (u) {
                     return u.id === _this2.record.author_id;
                 });
             }
