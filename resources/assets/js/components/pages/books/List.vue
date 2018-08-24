@@ -82,7 +82,7 @@
             },
             filter() {
                 // after filtering than can be less pages so lets navigate to the first page
-                this.$router.replace({name: 'books.index', params: {resource: this.$route.params.resource}});
+                this.$router.replace({name: 'books.index'});
                 this.fetchPageData();
             }
         },

@@ -1,9 +1,12 @@
 <template>
     <vue-page id="resource-edit-page" :loading="loading">
-        <b-button variant="primary mb-3"
-                  :to="{ name: 'books.edit', params: { id: this.$route.params.id }}"><i
-            class="fa fa-edit"></i> Edit book
-        </b-button>
+        <div class="btn-group mb-3" role="group">
+            <b-button variant="primary"
+                      :to="{ name: 'books.edit', params: { id: this.$route.params.id }}"><i
+                class="fa fa-edit"></i> Edit book
+            </b-button>
+            <b-button variant="danger" @click="handleDeleteRecordClick"><i class="fa fa-remove"></i></b-button>
+        </div>
         <b-card no-body :header="data.name" style="max-width: 800px;" v-if="data">
             <dl class="resource-details">
                 <div class="my-2">
@@ -21,6 +24,7 @@
 
 <script>
     import axios from 'axios';
+    import deleteCurrentRecord from './common/mixins/deleteCurrentRecord';
 
     export default {
         data() {
@@ -29,6 +33,9 @@
                 loading: false
             };
         },
+        mixins: [
+            deleteCurrentRecord
+        ],
         watch: {
             'data.name'(name) {
                 this.viewRoute.meta.label = name;

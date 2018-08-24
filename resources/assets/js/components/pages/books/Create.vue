@@ -1,18 +1,16 @@
 <template>
-    <vue-page id="resource-edit-page" :loading="loading">
+    <vue-page id="resource-edit-page" :loading="loading" v-if="rules !== null">
         <div class="card" style="max-width: 800px;">
             <div class="card-header">New book</div>
             <div class="card-body">
-                <div v-if="rules !== null">
-                    <resource-form :rules="rules" :password="true" :validated="validated" :record="data"
-                                   @submit="submit">
-                        <b-row class="my-2" slot="buttons">
-                            <b-col class="text-right">
-                                <b-button type="submit" variant="primary" :disabled="errors.any()">Submit</b-button>
-                            </b-col>
-                        </b-row>
-                    </resource-form>
-                </div>
+                <resource-form :rules="rules" :password="true" :validated="validated" :record="data"
+                               @submit="submit">
+                    <b-row class="my-2" slot="buttons">
+                        <b-col class="text-right">
+                            <b-button type="submit" variant="primary" :disabled="errors.any()">Submit</b-button>
+                        </b-col>
+                    </b-row>
+                </resource-form>
             </div>
         </div>
     </vue-page>

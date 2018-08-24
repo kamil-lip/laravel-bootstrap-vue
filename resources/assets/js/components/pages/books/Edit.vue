@@ -1,9 +1,12 @@
 <template>
     <vue-page id="resource-edit-page" :loading="loading">
-        <b-button variant="primary mb-3"
-                  :to="{ name: 'books.show', params: { id: this.$route.params.id }}"><i
-            class="fa fa-eye"></i> View book
-        </b-button>
+        <div class="btn-group mb-3" role="group">
+            <b-button variant="primary"
+                      :to="{ name: 'books.show', params: { id: this.$route.params.id }}"><i
+                class="fa fa-eye"></i> View book
+            </b-button>
+            <b-button variant="danger" @click="handleDeleteRecordClick"><i class="fa fa-remove"></i></b-button>
+        </div>
         <b-card :header="'Edit book ' + data.name" v-if="data !== null && rules !== null" style="max-width: 800px;">
             <resource-form :rules="rules" :record="data" :validated="validated"
                            @submit="submit">
@@ -22,11 +25,15 @@
     import axios from 'axios';
     import S from 'string';
     import resourceForm from './common/Form';
+    import deleteCurrentRecord from './common/mixins/deleteCurrentRecord';
 
     export default {
         components: {
             resourceForm
         },
+        mixins: [
+            deleteCurrentRecord
+        ],
         data() {
             return {
                 data: null,
@@ -44,7 +51,6 @@
             fetchData() {
                 let path = '/api' + S(this.$route.fullPath).chompRight("/edit").s;
                 let config = {params: {rules: true}};
-                this.loading = true;
                 axios.get(path, config)
                     .then((response) => {
                         this.data = response.data.data;
@@ -66,9 +72,7 @@
                             text: message
                         });
 
-                    }).then(() => {
-                    this.loading = false;
-                });
+                    });
             },
             resetForm() {
                 this.fetchData();
