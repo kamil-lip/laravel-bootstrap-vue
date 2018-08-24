@@ -17,4 +17,10 @@ class Book extends Model
     {
         return $this->belongsTo('App\User', 'author_id', 'id');
     }
+
+    // depending on server configuration it can be string or integer so it's better to cast to int
+    protected $casts = [
+        'author_id' => 'integer',
+    ];
+
 }
