@@ -82513,7 +82513,7 @@ var render = function() {
                                       },
                                       [
                                         _c("i", {
-                                          staticClass: "fa fa-user-minus"
+                                          staticClass: "fa fa-remove"
                                         }),
                                         _vm._v(
                                           " Delete\n                            "
@@ -83404,6 +83404,8 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 //
 //
 //
+//
+//
 
 
 
@@ -83538,50 +83540,57 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
-    { staticClass: "card", staticStyle: { "max-width": "800px" } },
+    "vue-page",
+    { attrs: { id: "resource-edit-page", loading: _vm.loading } },
     [
-      _c("div", { staticClass: "card-header" }, [_vm._v("New user")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _vm.rules !== null
-          ? _c(
-              "div",
-              [
-                _c(
-                  "resource-form",
-                  {
-                    attrs: {
-                      rules: _vm.rules,
-                      password: true,
-                      validated: _vm.validated,
-                      record: _vm.data
-                    },
-                    on: { submit: _vm.submit }
-                  },
+      _c(
+        "div",
+        { staticClass: "card", staticStyle: { "max-width": "800px" } },
+        [
+          _c("div", { staticClass: "card-header" }, [_vm._v("New user")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _vm.rules !== null
+              ? _c(
+                  "div",
                   [
                     _c(
-                      "b-row",
+                      "resource-form",
                       {
-                        staticClass: "my-2",
-                        attrs: { slot: "buttons" },
-                        slot: "buttons"
+                        attrs: {
+                          rules: _vm.rules,
+                          password: true,
+                          validated: _vm.validated,
+                          record: _vm.data
+                        },
+                        on: { submit: _vm.submit }
                       },
                       [
                         _c(
-                          "b-col",
-                          { staticClass: "text-right" },
+                          "b-row",
+                          {
+                            staticClass: "my-2",
+                            attrs: { slot: "buttons" },
+                            slot: "buttons"
+                          },
                           [
                             _c(
-                              "b-button",
-                              {
-                                attrs: {
-                                  type: "submit",
-                                  variant: "primary",
-                                  disabled: _vm.errors.any()
-                                }
-                              },
-                              [_vm._v("Submit")]
+                              "b-col",
+                              { staticClass: "text-right" },
+                              [
+                                _c(
+                                  "b-button",
+                                  {
+                                    attrs: {
+                                      type: "submit",
+                                      variant: "primary",
+                                      disabled: _vm.errors.any()
+                                    }
+                                  },
+                                  [_vm._v("Submit")]
+                                )
+                              ],
+                              1
                             )
                           ],
                           1
@@ -83592,11 +83601,10 @@ var render = function() {
                   ],
                   1
                 )
-              ],
-              1
-            )
-          : _vm._e()
-      ])
+              : _vm._e()
+          ])
+        ]
+      )
     ]
   )
 }
@@ -84183,7 +84191,7 @@ var render = function() {
       _c(
         "b-button",
         { attrs: { variant: "primary mb-3", to: { name: "books.create" } } },
-        [_c("i", { staticClass: "fa fa-user-plus" }), _vm._v(" New book\n    ")]
+        [_c("i", { staticClass: "fa fa-plus" }), _vm._v(" New book\n    ")]
       ),
       _vm._v(" "),
       _c("div", { staticClass: "card" }, [
@@ -84338,7 +84346,7 @@ var render = function() {
                                       },
                                       [
                                         _c("i", {
-                                          staticClass: "fa fa-user-minus"
+                                          staticClass: "fa fa-remove"
                                         }),
                                         _vm._v(
                                           " Delete\n                            "
@@ -85038,6 +85046,8 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 //
 //
 //
+//
+//
 
 
 
@@ -85172,50 +85182,57 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
-    { staticClass: "card", staticStyle: { "max-width": "800px" } },
+    "vue-page",
+    { attrs: { id: "resource-edit-page", loading: _vm.loading } },
     [
-      _c("div", { staticClass: "card-header" }, [_vm._v("New book")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _vm.rules !== null
-          ? _c(
-              "div",
-              [
-                _c(
-                  "resource-form",
-                  {
-                    attrs: {
-                      rules: _vm.rules,
-                      password: true,
-                      validated: _vm.validated,
-                      record: _vm.data
-                    },
-                    on: { submit: _vm.submit }
-                  },
+      _c(
+        "div",
+        { staticClass: "card", staticStyle: { "max-width": "800px" } },
+        [
+          _c("div", { staticClass: "card-header" }, [_vm._v("New book")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _vm.rules !== null
+              ? _c(
+                  "div",
                   [
                     _c(
-                      "b-row",
+                      "resource-form",
                       {
-                        staticClass: "my-2",
-                        attrs: { slot: "buttons" },
-                        slot: "buttons"
+                        attrs: {
+                          rules: _vm.rules,
+                          password: true,
+                          validated: _vm.validated,
+                          record: _vm.data
+                        },
+                        on: { submit: _vm.submit }
                       },
                       [
                         _c(
-                          "b-col",
-                          { staticClass: "text-right" },
+                          "b-row",
+                          {
+                            staticClass: "my-2",
+                            attrs: { slot: "buttons" },
+                            slot: "buttons"
+                          },
                           [
                             _c(
-                              "b-button",
-                              {
-                                attrs: {
-                                  type: "submit",
-                                  variant: "primary",
-                                  disabled: _vm.errors.any()
-                                }
-                              },
-                              [_vm._v("Submit")]
+                              "b-col",
+                              { staticClass: "text-right" },
+                              [
+                                _c(
+                                  "b-button",
+                                  {
+                                    attrs: {
+                                      type: "submit",
+                                      variant: "primary",
+                                      disabled: _vm.errors.any()
+                                    }
+                                  },
+                                  [_vm._v("Submit")]
+                                )
+                              ],
+                              1
                             )
                           ],
                           1
@@ -85226,11 +85243,10 @@ var render = function() {
                   ],
                   1
                 )
-              ],
-              1
-            )
-          : _vm._e()
-      ])
+              : _vm._e()
+          ])
+        ]
+      )
     ]
   )
 }

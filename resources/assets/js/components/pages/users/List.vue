@@ -30,7 +30,7 @@
                                     <i class="fa fa-edit"></i> Edit
                                 </b-button>
                                 <b-button size="sm" @click.stop="handleDeleteRecordClick(row.item)" variant="danger">
-                                    <i class="fa fa-user-minus"></i> Delete
+                                    <i class="fa fa-remove"></i> Delete
                                 </b-button>
                             </template>
                         </b-table>

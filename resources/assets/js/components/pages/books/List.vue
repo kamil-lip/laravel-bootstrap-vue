@@ -2,7 +2,7 @@
     <vue-page id="resource-list-page">
         <b-button variant="primary mb-3"
                   :to="{ name: 'books.create' }"><i
-            class="fa fa-user-plus"></i> New book
+            class="fa fa-plus"></i> New book
         </b-button>
         <div class="card">
             <div class="card-header">Books</div>
@@ -30,7 +30,7 @@
                                     <i class="fa fa-edit"></i> Edit
                                 </b-button>
                                 <b-button size="sm" @click.stop="handleDeleteRecordClick(row.item)" variant="danger">
-                                    <i class="fa fa-user-minus"></i> Delete
+                                    <i class="fa fa-remove"></i> Delete
                                 </b-button>
                             </template>
                         </b-table>

@@ -1,4 +1,5 @@
 <template>
+    <vue-page id="resource-edit-page" :loading="loading">
         <div class="card" style="max-width: 800px;">
             <div class="card-header">New user</div>
             <div class="card-body">
@@ -14,6 +15,7 @@
                 </div>
             </div>
         </div>
+    </vue-page>
 </template>
 
 <script>
