@@ -1,6 +1,6 @@
 <template>
         <svg width="200px" height="200px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
-             preserveAspectRatio="xMidYMid" class="lds-ripple">
+             preserveAspectRatio="xMidYMid" class="lds-ripple block-loader">
             <circle cx="50" cy="50" r="26.5737" fill="none"
                     stroke="#f05125" stroke-width="2">
                 <animate attributeName="r" calcMode="spline" values="0;40" keyTimes="0;1" dur="1"
@@ -25,5 +25,8 @@
 </script>
 
 <style>
-
+    .block-loader {
+        display: block;
+        margin: 30px auto;
+    }
 </style>
