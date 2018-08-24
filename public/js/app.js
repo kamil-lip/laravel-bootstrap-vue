@@ -1445,6 +1445,12 @@ function clickHandlerFactory(_ref3) {
 
 /***/ }),
 /* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(214);
+
+/***/ }),
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1486,12 +1492,6 @@ function clickHandlerFactory(_ref3) {
     }
   }
 });
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(214);
 
 /***/ }),
 /* 13 */
@@ -37232,7 +37232,7 @@ var props = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_form_radio_check__ = __webpack_require__(66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_form__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_form_size__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_form_state__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_form_state__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mixins_form_custom__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils_array__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_loose_equal__ = __webpack_require__(37);
@@ -37523,7 +37523,7 @@ var props = {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_id__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_form__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_form_state__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_form_state__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_form_radio_check__ = __webpack_require__(66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_loose_equal__ = __webpack_require__(37);
 
@@ -37622,7 +37622,7 @@ var props = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_id__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_form__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_form_size__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_form_state__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_form_state__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_array__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__form_input_css__ = __webpack_require__(148);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__form_input_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__form_input_css__);
@@ -39463,7 +39463,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_VuePage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_VuePage__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_layouts_App__ = __webpack_require__(294);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_layouts_App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_layouts_App__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_axios__);
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -39583,7 +39583,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_5_vee_
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(12);
+window.axios = __webpack_require__(11);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -63836,7 +63836,7 @@ Object(__WEBPACK_IMPORTED_MODULE_1__utils_plugins__["c" /* vueUse */])(VuePlugin
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_warn__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_id__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_form_state__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_form_state__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__layout_form_row__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__form_form_text__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__form_form_invalid_feedback__ = __webpack_require__(63);
@@ -64172,7 +64172,7 @@ Object(__WEBPACK_IMPORTED_MODULE_2__utils_plugins__["c" /* vueUse */])(VuePlugin
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_form__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_form_options__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_form_size__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_form_state__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_form_state__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mixins_form_custom__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__form_checkbox__ = __webpack_require__(65);
 
@@ -64321,7 +64321,7 @@ Object(__WEBPACK_IMPORTED_MODULE_2__utils_plugins__["c" /* vueUse */])(VuePlugin
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_form_options__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_form__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_form_size__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_form_state__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_form_state__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mixins_form_custom__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__form_radio__ = __webpack_require__(67);
 
@@ -64535,7 +64535,7 @@ Object(__WEBPACK_IMPORTED_MODULE_1__utils_plugins__["c" /* vueUse */])(VuePlugin
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_id__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_form__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_form_size__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_form_state__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_form_state__ = __webpack_require__(12);
 
 
 
@@ -64715,7 +64715,7 @@ Object(__WEBPACK_IMPORTED_MODULE_1__utils_plugins__["c" /* vueUse */])(VuePlugin
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_id__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_form__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_form_state__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_form_state__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_form_custom__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_array__ = __webpack_require__(3);
 
@@ -65000,7 +65000,7 @@ Object(__WEBPACK_IMPORTED_MODULE_1__utils_plugins__["c" /* vueUse */])(VuePlugin
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_form_options__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_form__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_form_size__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_form_state__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_form_state__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mixins_form_custom__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils_array__ = __webpack_require__(3);
 
@@ -81974,7 +81974,7 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_v_debounce__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_v_debounce___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_v_debounce__);
@@ -82634,7 +82634,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_string__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_string___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_string__);
@@ -83378,7 +83378,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_string__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_string___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_string__);
@@ -83707,7 +83707,7 @@ exports.push([module.i, "\n.resource-details > div {\n    display: -webkit-box;\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 //
 //
@@ -84013,12 +84013,21 @@ exports.push([module.i, "\n#resource-list-page .block-loader {\n    height: 400p
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_v_debounce__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_v_debounce___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_v_debounce__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_BlockLoader__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_BlockLoader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__common_BlockLoader__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -84073,17 +84082,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     directives: {
         debounce: __WEBPACK_IMPORTED_MODULE_1_v_debounce___default.a
     },
+    props: {
+        resourceName: String
+    },
     data: function data() {
         return {
             data: null,
-            tableFields: ["id", "name", "author.name", "actions"],
-            breadcrumbItems: [{
-                text: 'Home',
-                to: { name: 'home' }
-            }, {
-                text: 'Books',
-                to: { name: 'book.index' }
-            }],
+            tableFields: ["id", "name", "author.name", "created_at", "updated_at", "actions"],
             filter: '',
             filterDelay: 400,
             loading: false
@@ -84093,13 +84098,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     watch: {
         $route: function $route(route) {
             // don't fetch data if we are leaving index page
-            if (route.name === 'book.index') {
+            if (route.name === 'books.index') {
                 this.fetchPageData();
             }
         },
         filter: function filter() {
             // after filtering than can be less pages so lets navigate to the first page
-            this.$router.replace({ name: 'book.index' });
+            this.$router.replace({ name: 'books.index', params: { resource: this.$route.params.resource } });
             this.fetchPageData();
         }
     },
@@ -84108,9 +84113,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             this.loading = true;
-            var params = {
-                with: 'author'
-            };
+            var params = { with: 'author' };
             if (this.filter.length > 0) {
                 params['filter'] = this.filter;
             }
@@ -84123,7 +84126,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         pagLinkGen: function pagLinkGen(pageNum) {
             return {
-                name: 'book.index',
+                name: 'books.index',
                 query: {
                     page: pageNum
                 }
@@ -84173,190 +84176,225 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("vue-page", { attrs: { id: "resource-list-page" } }, [
-    _vm.data !== null
-      ? _c(
-          "div",
-          [
-            _c("b-breadcrumb", { attrs: { items: _vm.breadcrumbItems } }),
-            _vm._v(" "),
-            _c("h1", [_vm._v("Books")]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c(
-              "b-button",
-              { attrs: { variant: "primary", to: { name: "book.create" } } },
-              [
-                _c("i", { staticClass: "fas fa-user-plus" }),
-                _vm._v(" New book\n        ")
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "my-3 clearfix" },
-              [
-                !_vm.loading && _vm.data.total > 0
-                  ? _c("b-pagination-nav", {
-                      staticClass: "float-right",
-                      attrs: {
-                        "use-router": true,
-                        "link-gen": _vm.pagLinkGen,
-                        "number-of-pages": _vm.data.last_page,
-                        align: "right"
-                      },
-                      model: {
-                        value: _vm.data.current_page,
-                        callback: function($$v) {
-                          _vm.$set(_vm.data, "current_page", $$v)
-                        },
-                        expression: "data.current_page"
-                      }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _c(
-                  "b-form",
-                  {
-                    staticClass: "form-inline float-left",
-                    on: {
-                      submit: function($event) {
-                        $event.preventDefault()
-                      }
-                    }
-                  },
-                  [
-                    _c("label", { staticClass: "mr-sm-2" }, [_vm._v("Filter")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
+  return _c(
+    "vue-page",
+    { attrs: { id: "resource-list-page" } },
+    [
+      _c(
+        "b-button",
+        { attrs: { variant: "primary mb-3", to: { name: "books.create" } } },
+        [_c("i", { staticClass: "fa fa-user-plus" }), _vm._v(" New book\n    ")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-header" }, [_vm._v("Books")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _vm.data !== null
+            ? _c(
+                "div",
+                [
+                  _c(
+                    "div",
+                    { staticClass: "mb-3 clearfix" },
+                    [
+                      !_vm.loading && _vm.data.total > 0
+                        ? _c("b-pagination-nav", {
+                            staticClass: "float-right",
+                            attrs: {
+                              "use-router": true,
+                              "link-gen": _vm.pagLinkGen,
+                              "number-of-pages": _vm.data.last_page,
+                              align: "right"
+                            },
+                            model: {
+                              value: _vm.data.current_page,
+                              callback: function($$v) {
+                                _vm.$set(_vm.data, "current_page", $$v)
+                              },
+                              expression: "data.current_page"
+                            }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "b-form",
                         {
-                          name: "model",
-                          rawName: "v-model.lazy",
-                          value: _vm.filter,
-                          expression: "filter",
-                          modifiers: { lazy: true }
-                        },
-                        {
-                          name: "debounce",
-                          rawName: "v-debounce",
-                          value: _vm.filterDelay,
-                          expression: "filterDelay"
-                        }
-                      ],
-                      staticClass: "form-control filter",
-                      attrs: { placeholder: "Type to search" },
-                      domProps: { value: _vm.filter },
-                      on: {
-                        change: function($event) {
-                          _vm.filter = $event.target.value
-                        }
-                      }
-                    })
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            !_vm.loading && _vm.data.total > 0
-              ? _c(
-                  "div",
-                  [
-                    _c("b-table", {
-                      staticClass: "book-list-table",
-                      attrs: {
-                        striped: "",
-                        hover: "",
-                        items: _vm.data.data,
-                        fields: _vm.tableFields
-                      },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "actions",
-                          fn: function(row) {
-                            return [
-                              _c(
-                                "b-button",
-                                {
-                                  attrs: {
-                                    size: "sm",
-                                    variant: "primary",
-                                    to: {
-                                      name: "book.edit",
-                                      params: { id: row.item.id }
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("i", { staticClass: "fas fa-edit" }),
-                                  _vm._v(" Edit\n                    ")
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "b-button",
-                                {
-                                  attrs: { size: "sm", variant: "danger" },
-                                  on: {
-                                    click: function($event) {
-                                      $event.stopPropagation()
-                                      _vm.handleDeleteRecordClick(row.item)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("i", { staticClass: "fas fa-user-minus" }),
-                                  _vm._v(" Delete\n                    ")
-                                ]
-                              )
-                            ]
+                          staticClass: "form-inline float-left",
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                            }
                           }
-                        }
-                      ])
-                    }),
-                    _vm._v(" "),
-                    _c("b-pagination-nav", {
-                      staticClass: "mb-3",
-                      attrs: {
-                        "use-router": true,
-                        "link-gen": _vm.pagLinkGen,
-                        "number-of-pages": _vm.data.last_page,
-                        align: "right"
-                      },
-                      model: {
-                        value: _vm.data.current_page,
-                        callback: function($$v) {
-                          _vm.$set(_vm.data, "current_page", $$v)
                         },
-                        expression: "data.current_page"
-                      }
-                    })
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.loading && _vm.data.total === 0
-              ? _c("b-alert", { attrs: { show: "" } }, [
-                  _vm._v(
-                    "No results matching your search criteria found.\n        "
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.loading
-              ? _c("block-loader", {
-                  staticClass:
-                    "block-loader align-self-center justify-content-center"
-                })
-              : _vm._e()
-          ],
-          1
-        )
-      : _vm._e()
-  ])
+                        [
+                          _c("label", { staticClass: "mr-sm-2" }, [
+                            _vm._v("Filter")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model.lazy",
+                                value: _vm.filter,
+                                expression: "filter",
+                                modifiers: { lazy: true }
+                              },
+                              {
+                                name: "debounce",
+                                rawName: "v-debounce",
+                                value: _vm.filterDelay,
+                                expression: "filterDelay"
+                              }
+                            ],
+                            staticClass: "form-control filter",
+                            attrs: { placeholder: "Type to search" },
+                            domProps: { value: _vm.filter },
+                            on: {
+                              change: function($event) {
+                                _vm.filter = $event.target.value
+                              }
+                            }
+                          })
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  !_vm.loading && _vm.data.total > 0
+                    ? _c(
+                        "div",
+                        [
+                          _c("b-table", {
+                            staticClass: "book-list-table",
+                            attrs: {
+                              striped: "",
+                              hover: "",
+                              items: _vm.data.data,
+                              fields: _vm.tableFields
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "actions",
+                                fn: function(row) {
+                                  return [
+                                    _c(
+                                      "b-button",
+                                      {
+                                        attrs: {
+                                          size: "sm",
+                                          variant: "success",
+                                          to: {
+                                            name: "books.show",
+                                            params: { id: row.item.id }
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", { staticClass: "fa fa-eye" }),
+                                        _vm._v(
+                                          " View\n                            "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-button",
+                                      {
+                                        attrs: {
+                                          size: "sm",
+                                          variant: "primary",
+                                          to: {
+                                            name: "books.edit",
+                                            params: { id: row.item.id }
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", { staticClass: "fa fa-edit" }),
+                                        _vm._v(
+                                          " Edit\n                            "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-button",
+                                      {
+                                        attrs: {
+                                          size: "sm",
+                                          variant: "danger"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            $event.stopPropagation()
+                                            _vm.handleDeleteRecordClick(
+                                              row.item
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fa fa-user-minus"
+                                        }),
+                                        _vm._v(
+                                          " Delete\n                            "
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                }
+                              }
+                            ])
+                          }),
+                          _vm._v(" "),
+                          _c("b-pagination-nav", {
+                            staticClass: "mb-3",
+                            attrs: {
+                              "use-router": true,
+                              "link-gen": _vm.pagLinkGen,
+                              "number-of-pages": _vm.data.last_page,
+                              align: "right"
+                            },
+                            model: {
+                              value: _vm.data.current_page,
+                              callback: function($$v) {
+                                _vm.$set(_vm.data, "current_page", $$v)
+                              },
+                              expression: "data.current_page"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.loading && _vm.data.total === 0
+                    ? _c("b-alert", { attrs: { show: "" } }, [
+                        _vm._v(
+                          "No results matching your search criteria found.\n                "
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.loading
+                    ? _c("block-loader", {
+                        staticClass:
+                          "block-loader align-self-center justify-content-center"
+                      })
+                    : _vm._e()
+                ],
+                1
+              )
+            : _vm._e()
+        ])
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -84421,7 +84459,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_string__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_string___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_string__);
@@ -84974,7 +85012,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_string__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_string___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_string__);
@@ -85303,7 +85341,7 @@ exports.push([module.i, "\n.resource-details > div {\n    display: -webkit-box;\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 //
 //
@@ -85556,6 +85594,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -85583,21 +85626,31 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "main",
-    {
-      staticClass: "lbv-page animated fadeIn fadeOut",
-      attrs: { role: "main" }
-    },
+    "div",
+    { staticClass: "container-fluid" },
     [
-      _c("transition", { attrs: { name: "fade" } }, [
-        _c("div", [!_vm.loading ? _vm._t("default") : _vm._e()], 2)
-      ]),
-      _vm._v(" "),
-      _vm.loading
-        ? _c("block-loader", {
-            staticClass: "block-loader align-self-center justify-content-center"
-          })
-        : _vm._e()
+      _c("transition", { attrs: { name: "animated fadeIn" } }, [
+        _c(
+          "main",
+          {
+            staticClass: "lbv-page animated fadeIn fadeOut",
+            attrs: { role: "main" }
+          },
+          [
+            _c("transition", { attrs: { name: "fade" } }, [
+              _c("div", [!_vm.loading ? _vm._t("default") : _vm._e()], 2)
+            ]),
+            _vm._v(" "),
+            _vm.loading
+              ? _c("block-loader", {
+                  staticClass:
+                    "block-loader align-self-center justify-content-center"
+                })
+              : _vm._e()
+          ],
+          1
+        )
+      ])
     ],
     1
   )
@@ -85673,10 +85726,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__nav__ = __webpack_require__(304);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_Breadcrumbs__ = __webpack_require__(305);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_Breadcrumbs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__common_Breadcrumbs__);
-//
-//
-//
-//
 //
 //
 //
@@ -86373,21 +86422,11 @@ var render = function() {
             "main",
             { staticClass: "main" },
             [
-              _c("Breadcrumbs", { attrs: { list: _vm.breadcrumbs } }),
+              _vm.breadcrumbs.length > 0
+                ? _c("Breadcrumbs", { attrs: { list: _vm.breadcrumbs } })
+                : _vm._e(),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "container-fluid" },
-                [
-                  _c(
-                    "transition",
-                    { attrs: { name: "animated fadeIn" } },
-                    [_c("router-view")],
-                    1
-                  )
-                ],
-                1
-              )
+              _c("router-view")
             ],
             1
           ),

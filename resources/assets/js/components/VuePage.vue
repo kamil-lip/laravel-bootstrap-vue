@@ -1,12 +1,17 @@
- <template>
-    <main role="main" class="lbv-page animated fadeIn fadeOut">
-        <transition name="fade">
-            <div>
-                <slot v-if="!loading"></slot>
-            </div>
+<template>
+    <div class="container-fluid">
+        <transition name="animated fadeIn">
+            <main role="main" class="lbv-page animated fadeIn fadeOut">
+                <transition name="fade">
+                    <div>
+                        <slot v-if="!loading"></slot>
+                    </div>
+                </transition>
+                <block-loader class="block-loader align-self-center justify-content-center"
+                              v-if="loading"></block-loader>
+            </main>
         </transition>
-        <block-loader class="block-loader align-self-center justify-content-center" v-if="loading"></block-loader>
-    </main>
+    </div>
 </template>
 
 <script>
