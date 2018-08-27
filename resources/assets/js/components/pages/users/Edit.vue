@@ -5,7 +5,7 @@
                       :to="{ name: 'users.show', params: { id: this.$route.params.id }}"><i
                 class="fa fa-eye"></i> View user
             </b-button>
-            <b-button variant="danger" @click="handleDeleteRecordClick"><i class="fa fa-remove"></i></b-button>
+            <b-button v-if="profile && profile.id !== data.id" variant="danger" @click="handleDeleteRecordClick"><i class="fa fa-remove"></i></b-button>
         </div>
         <b-card :header="'Edit user ' + data.name" v-if="data !== null && rules !== null" style="max-width: 800px;">
             <resource-form :rules="rules" :record="data" :validated="validated"
@@ -26,6 +26,7 @@
     import S from 'string';
     import resourceForm from './common/Form';
     import deleteCurrentRecord from './common/mixins/deleteCurrentRecord';
+    import Auth from "../../../Auth";
 
     export default {
         components: {
@@ -39,7 +40,8 @@
                 data: null,
                 validated: false,
                 rules: null,
-                loading: false
+                loading: false,
+                profile: null
             }
         },
         watch: {
@@ -135,6 +137,9 @@
                             text: message
                         });
                     })
+            },
+            async fetchProfile() {
+                this.profile = await Auth.getProfile();
             }
         },
         mounted() {
@@ -142,6 +147,7 @@
             this.viewRoute = routesMatched[routesMatched.length - 2];
             this.viewRoute.meta.label = this.$route.params.id;
             this.fetchData();
+            this.fetchProfile();
         }
     }
 </script>

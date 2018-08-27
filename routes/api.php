@@ -40,4 +40,6 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('/books/validation/rules', 'API\BookController@validationRules')->name('books.validation-rules');
 
+    Route::get('/profile', 'API\ProfileController@index')->name('profile.index');
+
 });

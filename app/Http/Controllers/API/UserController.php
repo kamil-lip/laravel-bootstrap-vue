@@ -116,6 +116,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        $currentUser = \Auth::user();
+        if($currentUser->id == $id) {
+            abort(403, 'Unauthorized action.');
+        }
         $user = User::find($id);
         $user->delete();
         return $user;

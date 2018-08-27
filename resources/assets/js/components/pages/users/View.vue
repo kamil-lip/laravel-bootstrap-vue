@@ -5,7 +5,7 @@
                       :to="{ name: 'users.edit', params: { id: this.$route.params.id }}"><i
                 class="fa fa-edit"></i> Edit user
             </b-button>
-            <b-button variant="danger" @click="handleDeleteRecordClick"><i class="fa fa-remove"></i></b-button>
+            <b-button v-if="profile && profile.id !== data.id" variant="danger" @click="handleDeleteRecordClick"><i class="fa fa-remove"></i></b-button>
         </div>
         <b-card no-body :header="data.name" style="max-width: 800px;" v-if="data">
             <dl class="resource-details">
@@ -25,12 +25,14 @@
 <script>
     import axios from 'axios';
     import deleteCurrentRecord from './common/mixins/deleteCurrentRecord';
+    import Auth from "../../../Auth";
 
     export default {
         data() {
             return {
                 data: null,
-                loading: false
+                loading: false,
+                profile: null
             };
         },
         mixins: [
@@ -69,6 +71,9 @@
                     }).then(() => {
                     this.loading = false;
                 });
+            },
+            async fetchProfile() {
+                this.profile = await Auth.getProfile();
             }
         },
         mounted() {
@@ -76,8 +81,8 @@
             this.viewRoute = routesMatched[routesMatched.length - 2];
             this.viewRoute.meta.label = this.$route.params.id;
             this.fetchData();
-        },
-
+            this.fetchProfile();
+        }
     }
 </script>
 

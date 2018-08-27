@@ -2,12 +2,12 @@
     <div class="app">
         <AppHeader fixed>
             <SidebarToggler class="d-lg-none" display="md" mobile/>
-            <b-link class="navbar-brand" to="#">
+            <b-link class="navbar-brand" to="/">
                 LBV Admin
             </b-link>
             <SidebarToggler class="d-md-down-none" display="lg"/>
             <b-navbar-nav class="ml-auto">
-                <DefaultHeaderDropdownAccnt/>
+                <DefaultHeaderDropdownAccnt />
             </b-navbar-nav>
             <AsideToggler class="d-none d-lg-block"/>
             <!--<AsideToggler class="d-lg-none" mobile />-->
@@ -52,9 +52,10 @@
     import DefaultHeaderDropdownAccnt from '../DefaultHeaderDropdownAccnt'
     import nav from '../../nav'
     import Breadcrumbs from '../common/Breadcrumbs';
+    import Auth from '../../Auth';
 
     export default {
-        name: 'full',
+        name: 'App',
         components: {
             AsideToggler,
             AppHeader,

@@ -1,5 +1,5 @@
 <template>
-    <vue-page id="resource-list-page">
+    <vue-page id="resource-list-page" :loading="data === null">
         <b-button variant="primary mb-3"
                   :to="{ name: 'books.create' }"><i
             class="fa fa-plus"></i> New book

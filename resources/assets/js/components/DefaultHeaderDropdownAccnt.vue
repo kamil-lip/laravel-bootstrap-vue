@@ -4,7 +4,7 @@
             <img
                 src="/images/avatars/6.jpg"
                 class="img-avatar"
-                alt="kamil@appdiamond.pl" />
+                :alt="profile ? profile.name : 'Please wait'" />
         </template>
         <template slot="dropdown">
             <b-dropdown-item @click="logout"><i class="fa fa-lock"/> Logout</b-dropdown-item>
@@ -17,6 +17,7 @@
 
 <script>
     import {HeaderDropdown as AppHeaderDropdown} from '@coreui/vue'
+    import Auth from '../Auth';
 
     export default {
         name: 'DefaultHeaderDropdownAccnt',
@@ -24,7 +25,10 @@
             AppHeaderDropdown
         },
         data: () => {
-            return {itemsCount: 42}
+            return {
+                itemsCount: 42,
+                profile: null
+            }
         },
         computed: {
             csrfToken() {
@@ -34,7 +38,13 @@
         methods: {
             logout() {
                 this.$refs.logoutForm.submit();
+            },
+            async getProfile() {
+                this.profile = await Auth.getProfile();
             }
+        },
+        created() {
+            this.getProfile();
         }
     }
 </script>

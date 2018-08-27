@@ -1,5 +1,5 @@
 <template>
-    <vue-page id="resource-list-page">
+    <vue-page id="resource-list-page" :loading="data === null">
         <b-button variant="primary mb-3"
                   :to="{ name: 'users.create' }"><i
             class="fa fa-user-plus"></i> New user
@@ -29,7 +29,7 @@
                                           :to="{ name: 'users.edit', params: { id: row.item.id }}">
                                     <i class="fa fa-edit"></i> Edit
                                 </b-button>
-                                <b-button size="sm" @click.stop="handleDeleteRecordClick(row.item)" variant="danger">
+                                <b-button v-if="!profile || row.item.id != profile.id" size="sm" @click.stop="handleDeleteRecordClick(row.item)" variant="danger">
                                     <i class="fa fa-remove"></i> Delete
                                 </b-button>
                             </template>
@@ -52,6 +52,7 @@
     import axios from 'axios';
     import debounce from 'v-debounce';
     import BlockLoader from '../../common/BlockLoader';
+    import Auth from '../../../Auth';
 
     export default {
 
@@ -61,16 +62,14 @@
         directives: {
             debounce
         },
-        props: {
-            resourceName: String
-        },
         data() {
             return {
                 data: null,
                 tableFields: ["id", "name", "email", "created_at", "updated_at", "actions"],
                 filter: '',
                 filterDelay: 400,
-                loading: false
+                loading: false,
+                profile: null
             };
         },
         watch: {
@@ -100,6 +99,9 @@
                     // always executed
                     this.loading = false
                 });
+            },
+            async fetchProfile() {
+                this.profile = await Auth.getProfile();
             },
             pagLinkGen(pageNum) {
                 return {
@@ -143,6 +145,7 @@
         ,
         mounted() {
             this.fetchPageData();
+            this.fetchProfile();
         }
     }
 </script>
